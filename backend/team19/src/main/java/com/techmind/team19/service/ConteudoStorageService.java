@@ -1,7 +1,6 @@
 package com.techmind.team19.service;
 
 import com.techmind.team19.dto.DadosRespostaConteudo;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
