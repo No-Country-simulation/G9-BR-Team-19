@@ -3,8 +3,8 @@ package com.techmind.team19.dto;
 import jakarta.validation.constraints.NotBlank;
 
 public record DadosConsultaConteudos(
-        @NotBlank(message = "Campo obrigatório")
+        @NotBlank(message = "Titulo obrigatório")
         String titulo,
-        @NotBlank(message = "Campo obrigatório")
+        @NotBlank(message = "Texto obrigatório")
         String texto) {
 }
