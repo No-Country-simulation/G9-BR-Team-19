@@ -7,7 +7,7 @@
 .DS_Store
 Thumbs.db
 
-# --- it ---
+# --- Git ---
 .git/
 .gitignore
 .gitattributes
