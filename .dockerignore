@@ -1,0 +1,36 @@
+# --- IDE e Configurações Locais ---
+.idea/
+.vscode/
+*.iml
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+
+# --- it ---
+.git/
+.gitignore
+.gitattributes
+
+# --- Build do Java ---
+**/target/
+**/.mvn/
+**/mvnw
+**/mvnw.cmd
+
+# --- Frontend---
+frontend/
+node_modules/
+dist/
+build/
+.next/
+
+# --- Data Science ---
+**/venv/
+**/.venv/
+**/env/
+**/.pytest_cache/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
