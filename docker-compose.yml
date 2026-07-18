@@ -1,6 +1,19 @@
 services:
+  datascience:
+    build:
+      context: ./Data Science
+    ports:
+      - "8000:8000"
+
   backend:
     build:
       context: ./backend/team19
     ports:
       - "8080:8080"
+
+    depends_on:
+      datascience:
+        condition: service_started
+    environment:
+      - MODEL_PYTHON_URL=http://datascience:8000/conteudo
+      - MODEL_PYTHON_MOCK_ENABLED=false
