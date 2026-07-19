@@ -119,6 +119,117 @@ backend/
 ```
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
+# Fluxo da Aplicação
+
+1. Cliente envia um conteúdo.
+2. O Backend valida os dados.
+3. O Backend chama a API da equipe de Data Science.
+4. A API executa o modelo de Machine Learning.
+5. O resultado retorna para o Backend.
+6. O Backend armazena o resultado em memória.
+7. O Backend devolve a resposta ao cliente.
+
+---
+
+# Integração com a API de IA
+
+Este projeto consome a API desenvolvida pela equipe de Data Science.
+
+### API Pública
+
+https://techmind-api.onrender.com
+
+### Swagger
+
+https://techmind-api.onrender.com/docs
+
+A API retorna:
+
+- categoria
+- probabilidade
+- tags
+- resumo
+
+---
+
+# Configuração
+
+Arquivo:
+
+```properties
+spring.application.name=team19
+
+model.python.url=https://techmind-api.onrender.com/conteudo
+
+model.python.mock-enabled=true
+```
+
+### model.python.url
+
+URL da API de Machine Learning.
+
+### model.python.mock-enabled
+
+Quando:
+
+```
+true
+```
+
+o backend utiliza dados simulados.
+
+Quando:
+
+```
+false
+```
+
+as chamadas são realizadas para a API FastAPI.
+
+---
+
+as chamadas são realizadas para a API FastAPI.
+
+---
+
+# Executando o Projeto
+
+## Pré-requisitos
+
+- Java 21
+- Maven 3.9+
+- Git
+
+Clone o projeto
+
+```bash
+git clone <url-do-repositorio>
+```
+
+Entre na pasta
+
+```bash
+cd backend
+```
+
+Execute
+
+```bash
+./mvnw spring-boot:run
+```
+
+ou
+
+```bash
+mvn spring-boot:run
+```
+
+A aplicação ficará disponível em
+
+```
+http://localhost:8080
+```
+
 ## 🧩 Implementação de Padrões de Projeto & Componentes
 
 A aplicação foi desenhada seguindo as melhores práticas de desenvolvimento corporativo em Java, garantindo baixo acoplamento, alta coesão e facilidade de manutenção.
@@ -131,6 +242,81 @@ A aplicação foi desenhada seguindo as melhores práticas de desenvolvimento co
 | **Tratamento Global** | `GlobalException` com `@RestControllerAdvice` | Intercepta exceções em tempo de execução, garantindo respostas padronizadas e códigos de status HTTP sem expor o stacktrace. |
 
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
+
+## 📡 Endpoints (Documentação da API)
+
+### URL base
+```text
+http://localhost:8080/api/conteudos
+```
+Corpo de solicitação
+
+**POST**
+
+```json
+{
+  "titulo": "Introdução ao Spring Boot",
+  "texto": "Neste conteúdo explicamos APIs REST utilizando Spring Boot."
+}
+```
+
+| Campo | Tipo | Validação | Descrição |
+| :--- | :--- | :--- | :--- |
+| `titulo` | `string` | `@NotBlank` | Título identificador do conteúdo enviado |
+| `texto` | `string` | `@NotBlank` | Corpo do texto bruto a ser processado pela IA |
+
+Corpo da resposta (200 OK)
+
+```json
+{
+  "categoria": "Backend",
+  "probabilidade": 0.94,
+  "tags": [
+    "java",
+    "spring boot",
+    "api rest"
+  ],
+  "resumo": "Neste conteúdo explicamos APIs REST utilizando Spring Boot."
+}
+```
+Listar Todos os Conteúdos processados
+
+**GET**
+
+```
+/api/conteudos
+```
+
+Corpo da resposta (200 OK - Lista de Resultados)
+
+```json
+{
+"id": 1,
+"titulo": "Avanços na Computação Quântica",
+"resumo": "O texto aborda o uso da mecânica quântica para aceleração exponencial do processamento de dados.",
+"categoria": "Tecnologia",
+"tags": ["Computação Quântica", "Inovação"],
+"probabilidade": 0.965
+}
+```
+---
+---
+
+## Buscar por categoria
+
+**GET**
+
+```
+/api/conteudos/categoria/{categoria}
+```
+
+Exemplo
+
+```
+GET /api/conteudos/categoria/Backend
+```
+
+---
 
 ## 🧪 Testes Realizados
 
@@ -173,54 +359,113 @@ A aplicação foi desenhada seguindo as melhores práticas de desenvolvimento co
 
 📄 **Relatórios disponíveis:** `RELATÓRIO_TESTES_TECHMIND.md` e `LISTA_TESTES_UNITARIOS.md`
 
-
-
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
-## 📡 Endpoints (Documentação da API)
+# Tratamento de Exceções
 
-### URL base
-```text
-http://localhost:8080/api/conteudos
-```
-Corpo de solicitação
+O projeto possui tratamento global utilizando `@RestControllerAdvice`.
 
-```json
-{
-"titulo": "Avanços na Computação Quântica",
-"texto": "A computação quântica utiliza as leis da mecânica quântica para processar informações de forma exponencialmente mais rápida que os computadores clássicos."
-}
-```
-| Campo | Tipo | Validação | Descrição |
-| :--- | :--- | :--- | :--- |
-| `titulo` | `string` | `@NotBlank` | Título identificador do conteúdo enviado |
-| `texto` | `string` | `@NotBlank` | Corpo do texto bruto a ser processado pela IA |
+Erros tratados:
 
-Corpo da resposta (200 OK)
+- 400 Bad Request
+- 404 Not Found
+- 500 Internal Server Error
+- Erros de validação
+
+Exemplo
 
 ```json
 {
-"id": 1,
-"titulo": "Avanços na Computação Quântica",
-"resumo": "O texto aborda o uso da mecânica quântica para aceleração exponencial do processamento de dados.",
-"categoria": "Tecnologia",
-"tags": ["Computação Quântica", "Inovação"],
-"probabilidade": 0.965
+    "status":400,
+    "message":"Texto obrigatório"
 }
 ```
-Listar Todos os Conteúdos
 
-GET /
+---
 
-Corpo da resposta (200 OK - Lista de Resultados)
+# Armazenamento
 
-```json
-{
-"id": 1,
-"titulo": "Avanços na Computação Quântica",
-"resumo": "O texto aborda o uso da mecânica quântica para aceleração exponencial do processamento de dados.",
-"categoria": "Tecnologia",
-"tags": ["Computação Quântica", "Inovação"],
-"probabilidade": 0.965
-}
+Atualmente os conteúdos classificados são armazenados apenas em memória utilizando uma lista (`ArrayList`).
+
+Não há persistência em banco de dados nesta versão.
+
+---
+
+# Docker
+
+Build
+
+```bash
+docker build -t techmind-backend .
 ```
+
+Executar
+
+```bash
+docker run -p 8080:8080 techmind-backend
+```
+
+Ou utilizando Docker Compose
+
+```bash
+docker compose up
+```
+
+---
+
+# Melhorias Futuras
+
+- Integração com banco de dados
+- Autenticação com JWT
+- Cache de respostas
+- Documentação com Swagger/OpenAPI
+- Testes unitários
+- Testes de integração
+- Deploy em ambiente de produção
+- Persistência dos conteúdos processados
+
+---
+
+# Equipes
+
+### Backend
+
+- Desenvolvimento da API REST em Spring Boot
+- Integração com a API de Machine Learning
+- Validação dos dados
+- Tratamento de exceções
+- Disponibilização dos endpoints REST
+
+### Data Science
+
+Responsável por:
+
+- Treinamento do modelo de classificação
+- Processamento de linguagem natural (NLP)
+- Geração de categorias
+- Extração de palavras-chave
+- Geração do resumo
+- Disponibilização da API FastAPI
+
+---
+
+# Status do Projeto
+
+Projeto em desenvolvimento.
+
+Atualmente possui:
+
+- API REST funcional
+- Integração com FastAPI
+- Modo Mock para desenvolvimento
+- Validação de dados
+- Tratamento global de exceções
+- Armazenamento temporário em memória
+- Estrutura preparada para futuras integrações com banco de dados
+
+---
+
+## Licença
+
+Projeto desenvolvido para fins acadêmicos durante o programa **No Country - Team 19**.
+
