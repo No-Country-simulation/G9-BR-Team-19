@@ -8,6 +8,15 @@ endpoint `POST /conteudo`, que recebe um título e um texto e retorna a
 categoria prevista, a probabilidade de confiança, as tags (palavras-chave)
 e um resumo extrativo.
 
+## 🌐 API no ar
+
+- **URL pública**: https://techmind-api.onrender.com
+- **Documentação interativa**: https://techmind-api.onrender.com/docs
+
+⚠️ Roda no plano gratuito do Render, então pode demorar ~30-60s para
+responder na primeira chamada após um tempo sem uso (ela "dorme" por
+inatividade).
+
 ## Localização no repositório
 
 Este projeto vive em `Data Science/techmind-api/` dentro do repositório
@@ -25,8 +34,8 @@ techmind-api/
 │   ├── text_processing.py   # Limpeza de texto (mesma lógica do notebook)
 │   └── schemas.py           # Schemas Pydantic de request/response
 ├── artifacts/
-│   ├── modelo_classificacao.joblib   # <- copiar do notebook, veja abaixo
-│   └── vectorizer_tfidf.joblib       # <- copiar do notebook, veja abaixo
+│   ├── modelo_classificacao.joblib
+│   └── vectorizer_tfidf.joblib
 ├── tests/
 │   └── test_api.py
 ├── Dockerfile
@@ -38,11 +47,10 @@ techmind-api/
 
 ## ⚠️ Antes de rodar: artefatos do modelo
 
-Os arquivos `modelo_classificacao.joblib` e `vectorizer_tfidf.joblib`
-**não estão inclusos** neste pacote com a versão mais atual — eles
-precisam ser copiados da pasta `Data Science/` (gerados pelo notebook
-`TechMind_Oficial.ipynb`) para dentro de `techmind-api/artifacts/`
-antes de rodar ou fazer deploy.
+Se os arquivos `modelo_classificacao.joblib` e `vectorizer_tfidf.joblib`
+dentro de `artifacts/` não forem os mais recentes, copie-os da pasta
+`Data Science/` (gerados pelo notebook `TechMind_Oficial.ipynb`) para
+dentro de `techmind-api/artifacts/` antes de rodar ou fazer deploy.
 
 ```bash
 cp "../modelo_classificacao.joblib" artifacts/
@@ -55,10 +63,12 @@ e baixá-los).
 
 ## Rodando localmente
 
+### No Windows
+
 ```bash
-# 1. Criar ambiente virtual (opcional, mas recomendado)
-python3 -m venv venv
-source venv/bin/activate  # No Windows: venv\Scripts\activate
+# 1. Criar ambiente virtual (recomendado)
+python -m venv venv
+venv\Scripts\activate
 
 # 2. Instalar dependências
 pip install -r requirements.txt
@@ -67,13 +77,28 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-A API sobe em `http://localhost:8000`. Documentação interativa
-automática em `http://localhost:8000/docs`.
+### No Mac / Linux
+
+```bash
+# 1. Criar ambiente virtual (recomendado)
+python3 -m venv venv
+source venv/bin/activate
+
+# 2. Instalar dependências
+pip install -r requirements.txt
+
+# 3. Rodar a API
+uvicorn app.main:app --reload
+```
+
+A API sobe em `http://127.0.0.1:8000` (também acessível por
+`http://localhost:8000` — são o mesmo endereço). Documentação
+interativa automática em `http://127.0.0.1:8000/docs`.
 
 ### Testando o endpoint
 
 ```bash
-curl -X POST http://localhost:8000/conteudo \
+curl -X POST http://127.0.0.1:8000/conteudo \
   -H "Content-Type: application/json" \
   -d '{
     "titulo": "Introdução ao Spring Boot",
@@ -140,7 +165,8 @@ requisição seguinte — normal para o plano gratuito.
 8. Aguarde o build (a primeira vez demora alguns minutos, pois instala
    as dependências e monta a imagem Docker).
 
-9. Quando terminar, o Render fornece uma URL pública, algo como:
+9. Quando terminar, o Render fornece uma URL pública — nesse projeto,
+   ficou assim:
    ```
    https://techmind-api.onrender.com
    ```
@@ -153,8 +179,9 @@ requisição seguinte — normal para o plano gratuito.
 Os arquivos `.joblib` precisam estar **commitados no repositório**
 dentro de `artifacts/` para que o Render consiga copiá-los durante o
 build do Docker (o `Dockerfile` faz `COPY artifacts/ ./artifacts/`).
-Não se esqueça de fazer commit/push desses arquivos junto com o
-restante do código antes de conectar o Render.
+Sempre que o modelo for retreinado, é preciso repetir esse fluxo:
+baixar os novos `.joblib` → substituir em `artifacts/` → commit/push.
+O Render detecta a mudança no GitHub e refaz o deploy automaticamente.
 
 ## Endpoints disponíveis
 
@@ -165,9 +192,11 @@ restante do código antes de conectar o Render.
 | POST | `/conteudo` | Classifica um conteúdo técnico |
 | GET | `/docs` | Documentação interativa (Swagger UI) |
 
-## Próximos passos
+## Status do projeto
 
-- [ ] Substituir os artefatos de teste pelos mais recentes do notebook
-      (dataset com ruído, SVC calibrado, ~92% de acurácia)
-- [ ] Conectar o repositório ao Render e configurar o deploy
-- [ ] Compartilhar a URL pública com a equipe (Data Science e DevOps)
+- [x] API construída em FastAPI, com endpoint `POST /conteudo`
+- [x] Testada localmente (Windows, com ambiente virtual)
+- [x] Artefatos mais recentes do notebook (dataset com ruído, SVC
+      calibrado, ~92% de acurácia) incluídos em `artifacts/`
+- [x] Repositório conectado ao Render e deploy configurado
+- [x] URL pública compartilhada com a equipe (Data Science e DevOps)
