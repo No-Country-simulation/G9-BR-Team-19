@@ -3,21 +3,30 @@
 
 ---
 
-![Java](https://img.shields.io/badge/Java-25-orange)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-4.1.0-brightgreen)
-![Maven](https://img.shields.io/badge/Maven-3.9%2B-red)
-![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white)
-![Google Colab](https://img.shields.io/badge/Google_Colab-F9AB00?logo=googlecolab&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+![Java](https://img.shields.io/badge/Java-25-ED8B00?logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-4.1.0-6DB33F?logo=springboot&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-3.9+-C71A36?logo=apachemaven&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.116+-009688?logo=fastapi&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Engine-2496ED?logo=docker&logoColor=white)
+![Docker Compose](https://img.shields.io/badge/Docker_Compose-Enabled-2496ED?logo=docker&logoColor=white)
+![Google Colab](https://img.shields.io/badge/Google_Colab-Notebook-F9AB00?logo=googlecolab&logoColor=white)
+![Flyway](https://img.shields.io/badge/Flyway-Migrations-CC0200?logo=flyway&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
+![Machine Learning](https://img.shields.io/badge/Machine-Learning-purple)
+![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white)
 
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
 ## 📋 Sobre o Projeto
 
+---
 O **TechMind API** é uma solução de backend desenvolvida para a orquestração e gerenciamento inteligente de conteúdos técnicos. A aplicação atua como uma ponte eficiente entre as requisições enviadas pelo usuário e um modelo preditivo de Inteligência Artificial baseado em Python, garantindo a validação dos dados de entrada, a classificação automatizada e a organização estruturada dessas informações.
+<hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
 ### 🎯 Objetivos
 
+---
 O backend atua como uma camada intermediária entre o cliente e a API de Machine Learning.
 
 Seu papel é:
@@ -34,37 +43,44 @@ Seu papel é:
 
 ## 🏗️ Arquitetura da Solução
 
+---
+
 ```text
 ┌─────────────┐
 │   Cliente   │  (Postman/cURL/Frontend)
 └──────┬──────┘
        │ POST /api/conteudos/processar
        ▼
-┌─────────────────────┐
-│   Java API :8080    │  ✅ Valida dados (Jakarta / Bean Validation)
-│   Spring Boot 4.1.0 │  ✅ Trata erros Globalmente (GlobalException)
-└──────┬──────────────┘  ✅ Filtro Inteligente (Busca por Categoria)
+┌─────────────────────┐  
+│   Java API :8080    │  ✅ Recebe requisições REST
+│   Spring Boot 4.1.0 │  ✅ Valida dados (Jakarta / Bean Validation)
+│                     │  ✅ Trata exceções globalmente
+└──────┬──────────────┘  ✅ Gerenciamento da API
+       │
+       ▼
+┌─────────────────────┐  ✅ Alternância de Ambiente (Modo Mock ativo)
+│   API de ML         │  ✅ Extração de palavras-chave
+│   FastAPI (Python)  │  ✅ Geração de resumo 
+└──────┬──────────────┘  ✅ Cálculo da probabilidade
        │
        ▼
 ┌─────────────────────┐
-│   Python Service    │  ✅ Integração com RestClient do Spring
-│   IA Wrapper        │  ✅ Alternância de Ambiente (Modo Mock ativo)
-└──────┬──────────────┘  ✅ Resiliência contra quedas do serviço
-       │
-       ▼
-┌─────────────────────┐
-│   Modelo de IA      │  ✅ Classificação e Sumarização de Conteúdo
-│   Mock/Real Service │  ✅ Retorna Categoria, Tags e Probabilidade
-└─────────────────────┘
+│   Modelo de IA      │  ✅ Vetorização TF-IDF
+│   Mock/Real Service │  ✅ Classificação e Sumarização de Conteúdo
+└─────────────────────┘  ✅ Retorna Categoria, Tags e Probabilidade
 ```
 
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
+
 ## 🛠️ Tecnologias
+
+---
 
 ### Backend (Java)
 *   ☕ **Java 25**
 *   🍃 **Spring Boot 4.1.0**
+*   🔧 **Maven** (Compilação)
 *   🔒 **RestClient + Validação (Jakarta)**
 *   📊 **Java Stream API** (Filtros em memória)
 *   🧰 **Lombok**
@@ -72,19 +88,21 @@ Seu papel é:
 ### Integração de ML (Python)
 *   🐍 **Python 3.11**
 *   ☁️ **Google Colab** (Treinamento do modelo)
+*   ⚡ **FastAPI**
 *   🔄 **IA Wrapper API**
 *   ✅ **Pydantic** (Validação)
-*   🔁 **Retry Logic** (Modo Mock de contingência)
 
 ### DevOps & Qualidade
 *   🐳 **Docker + Docker Compose**
-*   🔧 **Maven** (Compilação)
 *   ✅ **JUnit 5 + Pytest**
+*   🌱 **Git**
 *   📊 **Relatórios de Cobertura**
 
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
-## 🏗️ Estrutura do Projeto
+## 📁 Estrutura do Projeto
+
+---
 
 ```
 backend/
@@ -119,100 +137,70 @@ backend/
 ```
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
-# Fluxo da Aplicação
-
-1. Cliente envia um conteúdo.
-2. O Backend valida os dados.
-3. O Backend chama a API da equipe de Data Science.
-4. A API executa o modelo de Machine Learning.
-5. O resultado retorna para o Backend.
-6. O Backend armazena o resultado em memória.
-7. O Backend devolve a resposta ao cliente.
+## 🔗 Integração com a API de IA
 
 ---
 
-# Integração com a API de IA
+O backend comunica-se com a API desenvolvida pela equipe de Data Science para realizar a classificação automática de conteúdos técnicos.
 
-Este projeto consome a API desenvolvida pela equipe de Data Science.
-
-### API Pública
+###  🌐 API Pública
 
 https://techmind-api.onrender.com
 
-### Swagger
+### 📖 Swagger
 
 https://techmind-api.onrender.com/docs
 
-A API retorna:
+
+### 📦 A resposta da API contém
 
 - categoria
 - probabilidade
 - tags
 - resumo
 
+<hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
+
+## ⚙️ Configuração
+
 ---
 
-# Configuração
-
-Arquivo:
+As propriedades da aplicação são definidas no arquivo `application.properties`.
 
 ```properties
 spring.application.name=team19
 
 model.python.url=https://techmind-api.onrender.com/conteudo
-
 model.python.mock-enabled=true
 ```
 
-### model.python.url
+### 🔹 Propriedades
 
-URL da API de Machine Learning.
+| Propriedade | Descrição |
+|------------|-----------|
+| `model.python.url` | URL da API de Machine Learning utilizada pelo backend. |
+| `model.python.mock-enabled` | Quando `true`, utiliza respostas simuladas para desenvolvimento. Quando `false`, envia requisições para a API FastAPI. |
 
-### model.python.mock-enabled
+## ▶️ Executando o Projeto
 
-Quando:
-
-```
-true
-```
-
-o backend utiliza dados simulados.
-
-Quando:
-
-```
-false
-```
-
-as chamadas são realizadas para a API FastAPI.
-
----
-
-as chamadas são realizadas para a API FastAPI.
-
----
-
-# Executando o Projeto
-
-## Pré-requisitos
+### 📋 Pré-requisitos
 
 - Java 21
 - Maven 3.9+
 - Git
 
-Clone o projeto
+### 📥 Clone o projeto
 
 ```bash
 git clone <url-do-repositorio>
 ```
-
-Entre na pasta
+### 📂 Entre na pasta
 
 ```bash
 cd backend
 ```
 
-Execute
+### ▶️ Execute
 
 ```bash
 ./mvnw spring-boot:run
@@ -224,13 +212,16 @@ ou
 mvn spring-boot:run
 ```
 
-A aplicação ficará disponível em
+### A aplicação ficará disponível em:
 
 ```
 http://localhost:8080
 ```
+<hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
 ## 🧩 Implementação de Padrões de Projeto & Componentes
+
+---
 
 A aplicação foi desenhada seguindo as melhores práticas de desenvolvimento corporativo em Java, garantindo baixo acoplamento, alta coesão e facilidade de manutenção.
 
@@ -244,6 +235,8 @@ A aplicação foi desenhada seguindo as melhores práticas de desenvolvimento co
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
 ## 📡 Endpoints (Documentação da API)
+
+---
 
 ### URL base
 ```text
@@ -289,17 +282,18 @@ Listar Todos os Conteúdos processados
 
 Corpo da resposta (200 OK - Lista de Resultados)
 
-```json
-{
-"id": 1,
-"titulo": "Avanços na Computação Quântica",
-"resumo": "O texto aborda o uso da mecânica quântica para aceleração exponencial do processamento de dados.",
-"categoria": "Tecnologia",
-"tags": ["Computação Quântica", "Inovação"],
-"probabilidade": 0.965
-}
+``` json
+ {
+    "categoria": "Backend",
+    "probabilidade": 0.94,
+    "tags": [
+      "java",
+      "spring boot",
+      "api rest"
+    ],
+    "resumo": "Neste conteúdo explicamos APIs REST utilizando Spring Boot."
+  }
 ```
----
 ---
 
 ## Buscar por categoria
@@ -316,63 +310,52 @@ Exemplo
 GET /api/conteudos/categoria/Backend
 ```
 
----
+<hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
-## 🧪 Testes Realizados
+## 🧪 Testes
 
-### ✅ 54 Testes - 100% Aprovados (0 falhas)
+O projeto foi estruturado para permitir a criação de testes unitários e de integração utilizando o ecossistema de testes do Spring Boot.
 
-| Categoria | Quantidade | Status |
-| :--- | :---: | :---: |
-| **Testes Java (JUnit 5)** | 38 | ✅ 100% |
-| **Testes Python (Pytest)** | 16 | ✅ 100% |
-| **Cobertura de Código** | 82% | ✅ |
-| **Tempo de Execução** | 12s | ✅ |
+### Tecnologias de teste disponíveis
 
-### 📊 Distribuição dos Testes
+- ✅ Spring Boot Test
+- ✅ Spring Web MVC Test
+- ✅ Spring Data JPA Test
+- ✅ Flyway Test
 
-#### Java (38 testes):
-*   **Controladores (8):** Validação de caminhos felizes, respostas de erro e códigos HTTP.
-*   **DTOs (12):** Validações de restrições com `@NotBlank` em `DadosConsultaConteudos`.
-*   **Serviços (14):** Testes unitários isolando o comportamento de `ServiceDados` e simulação do Mock.
-*   **Configuração (4):** Inicialização do contexto do Spring Boot e injeção do `RestClient`.
+### Cenários previstos para validação
 
-#### Python (16 testes):
-*   **Rotas & IA Wrapper (9):** Verificações de endpoints de predição e correspondência de formatos.
-*   **Cliente de Integração (7):** Simulação de latência de rede, timeouts e tratamento de exceções textuais.
+- ✔️ Validação dos campos obrigatórios (`@NotBlank`)
+- ✔️ Processamento de conteúdos
+- ✔️ Listagem de conteúdos processados
+- ✔️ Busca por categoria
+- ✔️ Tratamento global de exceções
+- ✔️ Integração com a API de Machine Learning
 
-### 🔍 Cenários de Validação e Resiliência
+> Os testes podem ser executados utilizando o Maven:
 
-#### Validação (2):
-*   ✅ Título vazio ou nulo → Retorna `HTTP 400 Bad Request` (esperado)
-*   ✅ Corpo do texto em branco → Retorna `HTTP 400 Bad Request` (esperado)
-
-#### Resiliência & Exceções (2):
-*   ✅ Serviço de IA Python offline com Mock desativado → `GlobalException` intercepta e retorna `HTTP 500 Internal Server Error`
-*   ✅ Ativação do Modo Mock alternativo → API Java assume processamento em fallback e retorna `HTTP 200 OK`
-
-### ⚡ Desempenho
-
-*   **Tempo de Resposta Ponta a Ponta:** 90-140 ms
-*   **Tempo de Execução do Mock Local:** < 5 ms
-*   **Verificações de Integridade (Health Check):** < 10 ms
-
-📄 **Relatórios disponíveis:** `RELATÓRIO_TESTES_TECHMIND.md` e `LISTA_TESTES_UNITARIOS.md`
+```bash
+./mvnw test
+```
 
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
-# Tratamento de Exceções
+## ⚠️ Tratamento de Exceções
 
-O projeto possui tratamento global utilizando `@RestControllerAdvice`.
+---
 
-Erros tratados:
+A aplicação utiliza `@RestControllerAdvice` para centralizar o tratamento das exceções e padronizar as respostas da API.
 
-- 400 Bad Request
-- 404 Not Found
-- 500 Internal Server Error
-- Erros de validação
+### Erros tratados
 
-Exemplo
+| Código HTTP | Situação |
+|-------------|----------|
+| 🔴 400 | Requisição inválida |
+| 🟠 404 | Recurso não encontrado |
+| 🔴 500 | Erro interno do servidor |
+| 🟡 Validação | Campos obrigatórios não informados |
+
+### Exemplo
 
 ```json
 {
@@ -380,18 +363,21 @@ Exemplo
     "message":"Texto obrigatório"
 }
 ```
+<hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
+
+## 💾 Armazenamento
 
 ---
-
-# Armazenamento
 
 Atualmente os conteúdos classificados são armazenados apenas em memória utilizando uma lista (`ArrayList`).
 
-Não há persistência em banco de dados nesta versão.
+⚠️Não há persistência em banco de dados nesta versão.
+
+<hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
+
+## 🐳 Docker
 
 ---
-
-# Docker
 
 Build
 
@@ -411,9 +397,11 @@ Ou utilizando Docker Compose
 docker compose up
 ```
 
----
+<hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
-# Melhorias Futuras
+## 🚀 Melhorias Futuras
+
+---
 
 - Integração com banco de dados
 - Autenticação com JWT
@@ -424,48 +412,49 @@ docker compose up
 - Deploy em ambiente de produção
 - Persistência dos conteúdos processados
 
+<hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
+
+## 👥 Equipes
+
 ---
 
-# Equipes
-
-### Backend
+### 💻 Backend
 
 - Desenvolvimento da API REST em Spring Boot
 - Integração com a API de Machine Learning
 - Validação dos dados
-- Tratamento de exceções
-- Disponibilização dos endpoints REST
+- Tratamento global de exceções
+- Gerenciamento das requisições
 
-### Data Science
+### 🤖 Data Science
 
-Responsável por:
-
-- Treinamento do modelo de classificação
-- Processamento de linguagem natural (NLP)
-- Geração de categorias
+- Desenvolvimento do modelo de Machine Learning
+- Processamento de Linguagem Natural (NLP)
+- Classificação dos conteúdos
 - Extração de palavras-chave
-- Geração do resumo
+- Geração de resumos
 - Disponibilização da API FastAPI
 
----
+<hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
-# Status do Projeto
-
-Projeto em desenvolvimento.
-
-Atualmente possui:
-
-- API REST funcional
-- Integração com FastAPI
-- Modo Mock para desenvolvimento
-- Validação de dados
-- Tratamento global de exceções
-- Armazenamento temporário em memória
-- Estrutura preparada para futuras integrações com banco de dados
+## 📌 Status do Projeto
 
 ---
 
-## Licença
+O projeto encontra-se em desenvolvimento e atualmente possui:
+
+- ✅ API REST funcional
+- ✅ Integração com a API FastAPI
+- ✅ Modo Mock para desenvolvimento
+- ✅ Validação dos dados de entrada
+- ✅ Tratamento global de exceções
+- ✅ Armazenamento temporário em memória
+
+<hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
+
+## 📄 Licença
+
+---
 
 Projeto desenvolvido para fins acadêmicos durante o programa **No Country - Team 19**.
 
