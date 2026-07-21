@@ -1,0 +1,14 @@
+# Configuração de infraestrutura como código para o Render.
+# Ao conectar o repositório no Render, ele pode detectar este arquivo
+# automaticamente (ou você configura manualmente pela interface).
+services:
+  - type: web
+    name: techmind-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    envVars:
+      - key: ARTIFACTS_DIR
+        value: /app/artifacts
+    healthCheckPath: /health
