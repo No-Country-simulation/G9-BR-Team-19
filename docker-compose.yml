@@ -1,7 +1,7 @@
 services:
   datascience:
     build:
-      context: ./Data Science
+      context: ./Data Science/techmind-api
     ports:
       - "8000:8000"
 
@@ -13,7 +13,7 @@ services:
 
     depends_on:
       datascience:
-        condition: service_started
+        condition: service_healthy
     environment:
       - MODEL_PYTHON_URL=http://datascience:8000/conteudo
       - MODEL_PYTHON_MOCK_ENABLED=false
