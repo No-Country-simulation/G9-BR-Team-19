@@ -1,0 +1,38 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Team19Application",
+            "request": "launch",
+            "mainClass": "com.techmind.team19.Team19Application",
+            "projectName": "team19"
+        },
+        {
+            "name": "techmind",
+            "cwd": "Mobile\\techmind",
+            "request": "launch",
+            "type": "dart",
+            "toolArgs": [
+                "--dart-define=API_URL=http://127.0.0.1:8080/api"
+            ]
+        },
+        {
+            "name": "techmind (profile mode)",
+            "cwd": "Mobile\\techmind",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "techmind (release mode)",
+            "cwd": "Mobile\\techmind",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
