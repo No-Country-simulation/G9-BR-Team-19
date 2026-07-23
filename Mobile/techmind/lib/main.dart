@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:techmind/view/landpage_page.dart';
 import 'package:techmind/viewmodels/consulta_conteudo_viewmodels.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       title: 'Tech Mind',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        textTheme: GoogleFonts.icebergTextTheme(),
       ),
       home: const Landpage(),
     );
