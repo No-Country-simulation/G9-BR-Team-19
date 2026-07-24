@@ -10,10 +10,9 @@ class Landpage extends StatelessWidget {
       child: Scaffold(
         body: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Colors.amber, Colors.blue],
+            image: DecorationImage(
+              image: AssetImage('assets/plano_de_fundo.png'),
+              fit: BoxFit.cover,
             ),
           ),
           child: Padding(
@@ -22,25 +21,65 @@ class Landpage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               spacing: 12,
               children: [
-                Text(
-                  "Descubra o que seus dados realmente significam",
-                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: "Organização Inteligente",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      TextSpan(
+                        text: " de Conhecimento Técnico",
+                        style: TextStyle(color: const Color(0xFF000EA7)),
+                      ),
+                    ],
+                  ),
                 ),
                 Text(
-                  "Analise informações rapidamente através do nosso "
-                  "sistema de classificação de dados. Informe o conteúdo desejado"
-                  " e receba um resultado detalhado com a categoria identificada, "
-                  "o tipo correspondente e o nível de probabilidade da classificação.",
-                  style: TextStyle(fontSize: 18),
+                  "organização inteligente de conteúdo técnico, facilitando sua classificação,"
+                  " consulta e reutilização",
+                  style: TextStyle(fontSize: 18, color: Color(0xFF707070)),
+                  textAlign: TextAlign.center,
                 ),
+                Image.asset("assets/logo.png", scale: 2),
+
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    backgroundBuilder: (context, states, child) {
+                      return DecoratedBox(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            colors: [
+                              const Color(0xFF000EA7),
+                              const Color(0xFF000541),
+                            ],
+                          ),
+                        ),
+                        child: child,
+                      );
+                    },
+                  ),
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (_) => ConsultaConteudoView()),
                     );
                   },
-                  child: Text("Iniciar Consulta"),
+                  child: Text(
+                    "Iniciar Consulta",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ],
             ),
