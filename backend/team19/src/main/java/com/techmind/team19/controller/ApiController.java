@@ -47,4 +47,9 @@ public class ApiController {
         return ResponseEntity.ok(storageService.listar());
     }
 
+    @GetMapping("/conteudos/categoria/{categoria}")
+    public ResponseEntity<List<DadosRespostaConteudo>> listarPorCategoria(
+            @PathVariable String categoria) {
+        return ResponseEntity.ok(storageService.listarPorCategoria(categoria));
+    }
 }
