@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:techmind/config/app_size.dart';
 import 'package:techmind/view/consulta_conteudo_view.dart';
 
 class Landpage extends StatelessWidget {
@@ -47,7 +48,7 @@ class Landpage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Image.asset("assets/logo.png", scale: 2),
-
+                SizedBox(height: context.altura * 0.10),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(double.infinity, 50),
