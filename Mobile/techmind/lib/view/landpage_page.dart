@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:techmind/config/app_size.dart';
-import 'package:techmind/view/consulta_conteudo_view.dart';
+import 'package:techmind/view/login_view.dart';
 
 class Landpage extends StatelessWidget {
   const Landpage({super.key});
@@ -74,7 +74,7 @@ class Landpage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => ConsultaConteudoView()),
+                      MaterialPageRoute(builder: (_) => LoginView()),
                     );
                   },
                   child: Text(

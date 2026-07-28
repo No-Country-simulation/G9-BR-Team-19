@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:techmind/models/consulta_conteudo.dart';
+import 'package:techmind/shared/widgets/input_form.dart';
 import 'package:techmind/viewmodels/consulta_conteudo_viewmodels.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,23 @@ class _ConsultaConteudoViewState extends State<ConsultaConteudoView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(title: Text("TECHMIND"), centerTitle: true),
+        drawer: Drawer(
+          child: Column(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                child: DrawerHeader(
+                  decoration: BoxDecoration(color: Colors.blue),
+                  child: Text("TECHMIND"),
+                ),
+              ),
+              ListTile(title: Text("Nova Análise"), onTap: () {}),
+              ListTile(title: Text("Bibliotech"), onTap: () {}),
+              ListTile(title: Text("Métricas"), onTap: () {}),
+            ],
+          ),
+        ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -30,8 +48,8 @@ class _ConsultaConteudoViewState extends State<ConsultaConteudoView> {
                   spacing: 12,
                   children: [
                     Text("data"),
-                    inputForm(ctrTitulo, "Titulo"),
-                    inputForm(ctrTexto, "Texto"),
+                    InputForm(controller:  ctrTitulo, label:  "Titulo"),
+                    InputForm(controller:  ctrTexto, label:  "Texto"),
                     ElevatedButton(
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
@@ -57,19 +75,5 @@ class _ConsultaConteudoViewState extends State<ConsultaConteudoView> {
     );
   }
 
-  TextFormField inputForm(TextEditingController controller, String label) {
-    return TextFormField(
-      decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-        label: Text(label),
-      ),
-      controller: controller,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return "Campo obrigatório";
-        }
-        return null;
-      },
-    );
-  }
+  
 }
