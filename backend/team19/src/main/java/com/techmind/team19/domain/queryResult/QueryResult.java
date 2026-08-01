@@ -33,6 +33,8 @@ public class QueryResult {
 
     private Double probability;
 
+    private String summary;
+
     @ManyToMany
     @JoinTable(
             name = "query_result_tags",
