@@ -6,9 +6,9 @@ import jakarta.validation.constraints.NotBlank;
 public record DadosConsultaConteudos(
         @Schema(description = "Título do conteúdo", example = "Java")
         @NotBlank(message = "Titulo obrigatório")
-        String titulo,
+        String title,
 
         @Schema(description = "Texto a ser analisado", example = "Spring Boot facilita o desenvolvimento...")
         @NotBlank(message = "Texto obrigatório")
-        String texto) {
+        String text) {
 }

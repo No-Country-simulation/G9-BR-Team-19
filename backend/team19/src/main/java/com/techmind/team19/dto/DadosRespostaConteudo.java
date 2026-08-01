@@ -6,14 +6,14 @@ import java.util.List;
 
 public record DadosRespostaConteudo(
         @Schema(description = "Categoria da consulta", example = "Backend")
-        String categoria,
+        String category,
 
         @Schema(description = "Probabilidade", example = "0.8885")
-        Double probabilidade,
+        Double probability,
 
         @Schema(description = "Palavras chaves", example = "Integração, spring, spring boot, boot")
         List<String> tags,
 
         @Schema(description = "Resumo do texto", example = "Aprendendo integração com IA")
-        String resumo
+        String summary
 ) {}
