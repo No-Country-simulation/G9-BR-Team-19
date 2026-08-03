@@ -1,6 +1,7 @@
 package com.techmind.team19.domain.queryResult;
 
 import com.techmind.team19.domain.tag.Tag;
+import com.techmind.team19.dto.DadosRespostaConteudo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Table(name = "query_result")
 @Entity
@@ -25,11 +27,11 @@ public class QueryResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
+    //private String title;
 
-    private String Text;
+    //private String Text;
 
-    private String Category;
+    private String category;
 
     private Double probability;
 
@@ -50,4 +52,15 @@ public class QueryResult {
     @Column(name = "updated_at")
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    public QueryResult(DadosRespostaConteudo resposta) {
+        this.category = resposta.category();
+        this.probability = resposta.probability();
+        this.summary = resposta.summary();
+        this.tags = new HashSet<>();
+        this.tags = resposta.tags()
+                .stream()
+                .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
 }

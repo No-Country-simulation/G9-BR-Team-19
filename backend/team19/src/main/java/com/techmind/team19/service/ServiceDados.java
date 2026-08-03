@@ -1,11 +1,13 @@
 package com.techmind.team19.service;
 
+import com.techmind.team19.domain.tag.DadosTag;
 import com.techmind.team19.dto.DadosConsultaConteudos;
 import com.techmind.team19.dto.DadosRespostaConteudo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ServiceDados {
@@ -21,14 +23,14 @@ public class ServiceDados {
     private final RestClient restClient = RestClient.create();
 
     public DadosRespostaConteudo chamarModeloDados(DadosConsultaConteudos dados) {
-        if (dadosMockados) {
+        /*if (dadosMockados) {
             return new DadosRespostaConteudo(
                     "Backend",
                     0.89,
-                    List.of("Java", "Spring Boot", "API REST"),
+                    new DadosTag("Java"),
                     "Texto de exemplo para o resumo"
             );
-        }
+        }*/
 
         return restClient.post()
                 .uri(dadosUrl)

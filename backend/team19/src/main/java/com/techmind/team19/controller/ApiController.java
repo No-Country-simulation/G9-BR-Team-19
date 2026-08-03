@@ -1,5 +1,7 @@
 package com.techmind.team19.controller;
 
+import com.techmind.team19.domain.queryResult.QueryResult;
+import com.techmind.team19.domain.queryResult.QueryResultRepository;
 import com.techmind.team19.dto.DadosConsultaConteudos;
 import com.techmind.team19.dto.DadosRespostaConteudo;
 import com.techmind.team19.service.ConteudoStorageService;
@@ -26,6 +28,9 @@ public class ApiController {
     @Autowired
     private ServiceDados serviceDados;
 
+    @Autowired
+    private QueryResultRepository resultRepository;
+
     @Operation(summary = "Processa um Conteúdo", description = "Recebe um título e um texto, envia para o modelo de IA e retorna o resultado.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Conteúdo enviado com sucesso."),
@@ -36,7 +41,8 @@ public class ApiController {
 
         DadosRespostaConteudo resposta = serviceDados.chamarModeloDados(dados);
 
-        storageService.salvar(resposta);
+        var queryResult = new QueryResult(resposta);
+        resultRepository.save(queryResult);
 
         return ResponseEntity.ok(resposta);
     }
