@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Tech Mind',
       theme: ThemeData(
+        // colorScheme: ColorScheme.fromSeed(seedColor: Color(0xff000EA7)),
         colorScheme: ColorScheme.fromSeed(seedColor: Color(0xff000EA7)),
         textTheme: GoogleFonts.icebergTextTheme(),
       ),

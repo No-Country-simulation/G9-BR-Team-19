@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:techmind/config/app_size.dart';
 import 'package:techmind/models/consulta_conteudo.dart';
 import 'package:techmind/shared/widgets/botao_form.dart';
 import 'package:techmind/shared/widgets/input_form.dart';
@@ -21,31 +22,81 @@ class _ConsultaConteudoViewState extends State<ConsultaConteudoView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: const Color(0x0F0F0F80),
         resizeToAvoidBottomInset: false,
-        appBar: AppBar(title: Text("TECHMIND"), centerTitle: true),
+        appBar: AppBar(
+          iconTheme: const IconThemeData(color: Colors.white),
+          title: Text("TECHMIND", style: TextStyle(color: Colors.white)),
+          centerTitle: true,
+          backgroundColor: const Color(0x0F0F0F80),
+        ),
         drawer: Drawer(
           child: Column(
+            mainAxisSize: MainAxisSize.max,
             children: [
               SizedBox(
+                height: context.altura * 0.10,
                 width: double.infinity,
                 child: DrawerHeader(
-                  decoration: BoxDecoration(color: Colors.blue),
-                  child: Text("TECHMIND"),
+                  decoration: BoxDecoration(color: Color(0xff000541)),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "TECHMIND",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
               ),
               ListTile(title: Text("Nova Análise"), onTap: () {}),
+              const Divider(),
               ListTile(title: Text("Bibliotech"), onTap: () {}),
+              const Divider(),
               ListTile(title: Text("Métricas"), onTap: () {}),
+              const Divider(),
+
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        side: const BorderSide(
+                          color: Color(0xff000541), // Cor da borda
+                          width: 0.7,
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text("Sair", style: TextStyle(fontSize: 20)),
+                          IconButton(
+                            color: Colors.red,
+                            onPressed: () {},
+                            icon: Icon(Icons.logout, size: 25),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
         body: Container(
-          // decoration: BoxDecoration(
-          //   image: DecorationImage(
-          //     image: AssetImage('assets/plano_de_fundo.png'),
-          //     fit: BoxFit.cover,
-          //   ),
-          // ),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/plano_de_fundo.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Padding(
             padding: const EdgeInsets.all(18.0),
             child: Column(
@@ -53,17 +104,21 @@ class _ConsultaConteudoViewState extends State<ConsultaConteudoView> {
               children: [
                 ListTile(
                   minVerticalPadding: 0,
-                  title: Text("Análise de Conteúdo"),
+                  title: Text(
+                    "Análise de Conteúdo",
+                    style: TextStyle(color: Colors.white),
+                  ),
                   leading: Container(
                     padding: EdgeInsets.all(15),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       color: const Color.fromARGB(104, 33, 149, 243),
                     ),
-                    child: Icon(Icons.edit_document),
+                    child: Icon(Icons.edit_document, color: Colors.white),
                   ),
                   subtitle: Text(
                     "Preencha os campos a baixo para analisar o conteúdo",
+                    style: TextStyle(color: Colors.white54),
                   ),
                 ),
                 Form(
@@ -85,7 +140,10 @@ class _ConsultaConteudoViewState extends State<ConsultaConteudoView> {
                       children: [
                         Text(
                           "Titulo",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                         InputForm(
                           controller: ctrTitulo,
@@ -93,7 +151,10 @@ class _ConsultaConteudoViewState extends State<ConsultaConteudoView> {
                         ),
                         Text(
                           "Texto",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                         InputForm(
                           controller: ctrTexto,

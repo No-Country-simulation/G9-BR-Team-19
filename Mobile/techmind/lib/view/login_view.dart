@@ -12,49 +12,62 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-          child: Column(
-            spacing: 12,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Entrar",
-                style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
-              ),
-              Row(
-                children: [
-                  Text(
-                    "Ainda não possui um conta?",
-                    style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.5)),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/plano_de_fundo.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            child: Column(
+              spacing: 12,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Entrar",
+                  style: TextStyle(
+                    fontSize: 45,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
-                  TextButton(onPressed: () {}, child: Text("Cadastrar-se")),
-                ],
-              ),
-              InputForm(
-                controller: ctlLogin,
-                label: "Nome do usuário ou Email",
-                icon: Icon(Icons.people),
-              ),
-              InputForm(
-                controller: ctlSenha,
-                label: "Senha",
-                icon: Icon(Icons.lock),
-              ),
-              const SizedBox(height: 12),
-              BotaoForm(
-                label: "Login",
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => ConsultaConteudoView()),
-                  );
-                },
-                gradient1: Color(0xff270551),
-                gradient2: Color(0xff4515A3),
-              ),
-            ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Ainda não possui um conta?",
+                      style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1)),
+                    ),
+                    TextButton(onPressed: () {}, child: Text("Cadastrar-se")),
+                  ],
+                ),
+                InputForm(
+                  controller: ctlLogin,
+                  label: "Nome do usuário ou Email",
+                  icon: Icon(Icons.people, color: Colors.white),
+                ),
+                InputForm(
+                  controller: ctlSenha,
+                  label: "Senha",
+                  obscureText: true,
+                  icon: Icon(Icons.lock, color: Colors.white),
+                ),
+                const SizedBox(height: 12),
+                BotaoForm(
+                  label: "Login",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => ConsultaConteudoView()),
+                    );
+                  },
+                  gradient1: Color(0xFF000EA7),
+                  gradient2: Color(0xFF000541),
+                ),
+              ],
+            ),
           ),
         ),
       ),
