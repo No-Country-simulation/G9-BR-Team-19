@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:techmind/models/consulta_conteudo.dart';
+import 'package:techmind/models/consulta_resposta.dart';
 import 'package:techmind/repository/consulta_conteudo_repository.dart';
 
 class ConsultaConteudoViewmodels extends ChangeNotifier {
@@ -8,11 +9,16 @@ class ConsultaConteudoViewmodels extends ChangeNotifier {
   List<ConsultaConteudo> consultaConteudo = [];
 
   bool carregar = false;
+  ConsultaResposta? resposta;
 
   Future<void> enviarConteudo(ConsultaConteudo consultaConteudo) async {
     carregar = true;
-    await repositorio.enviarDadosConsulta(consultaConteudo);
-    carregar = false;
     notifyListeners();
+    try {
+     resposta = await repositorio.enviarDadosConsulta(consultaConteudo);
+    } finally {
+      carregar = false;
+      notifyListeners();
+    }
   }
 }

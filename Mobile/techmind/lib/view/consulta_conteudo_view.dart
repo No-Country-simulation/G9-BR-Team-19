@@ -3,6 +3,7 @@ import 'package:techmind/config/app_size.dart';
 import 'package:techmind/models/consulta_conteudo.dart';
 import 'package:techmind/shared/widgets/botao_form.dart';
 import 'package:techmind/shared/widgets/input_form.dart';
+import 'package:techmind/view/consulta_resposta_view.dart';
 import 'package:techmind/viewmodels/consulta_conteudo_viewmodels.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,7 @@ class _ConsultaConteudoViewState extends State<ConsultaConteudoView> {
   TextEditingController ctrTexto = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final vm = context.watch<ConsultaConteudoViewmodels>();
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color(0x0F0F0F80),
@@ -161,23 +163,41 @@ class _ConsultaConteudoViewState extends State<ConsultaConteudoView> {
                           hintText: "Digite aqui o texto...",
                           maxLine: 6,
                         ),
-                        BotaoForm(
-                          label: "Consultar",
-                          onPressed: () async {
-                            if (formKey.currentState!.validate()) {
-                              final dados = ConsultaConteudo(
-                                titulo: ctrTitulo.text,
-                                texto: ctrTexto.text,
-                              );
+                        vm.carregar
+                            ? Center(child: CircularProgressIndicator())
+                            : BotaoForm(
+                                label: "Consultar",
+                                onPressed: () async {
+                                  if (formKey.currentState!.validate()) {
+                                    final dados = ConsultaConteudo(
+                                      titulo: ctrTitulo.text,
+                                      texto: ctrTexto.text,
+                                    );
 
-                              await context
-                                  .read<ConsultaConteudoViewmodels>()
-                                  .enviarConteudo(dados);
-                            }
-                          },
-                          gradient1: Color(0xff000EA7),
-                          gradient2: Color(0xff000541),
-                        ),
+                                    final vm = context
+                                        .read<ConsultaConteudoViewmodels>();
+
+                                    await vm.enviarConteudo(dados);
+
+                                    if (!context.mounted) return;
+
+                                    final resposta = vm.resposta;
+
+                                    if (resposta != null) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => ConsultaRespostaView(
+                                            resposta: resposta,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  }
+                                },
+                                gradient1: Color(0xff000EA7),
+                                gradient2: Color(0xff000541),
+                              ),
                       ],
                     ),
                   ),

@@ -11,7 +11,7 @@ class ConsultaResposta {
     required this.resumo,
   });
 
-  factory ConsultaResposta.fromjson(Map<String, dynamic> json) {
+  factory ConsultaResposta.fromJson(Map<String, dynamic> json) {
     return ConsultaResposta(
       categoria: json['categoria'],
       probabilidade: (json['probabilidade'] as num).toDouble(),
