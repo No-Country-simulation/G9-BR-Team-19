@@ -53,14 +53,14 @@ public class QueryResult {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public QueryResult(DadosRespostaConteudo resposta) {
+    public QueryResult(DadosRespostaConteudo resposta, Set<Tag> tags) {
         this.category = resposta.category();
         this.probability = resposta.probability();
         this.summary = resposta.summary();
-        this.tags = new HashSet<>();
-        this.tags = resposta.tags()
+        this.tags = tags;
+        /*this.tags = resposta.tags()
                 .stream()
                 .map(Tag::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet());*/
     }
 }

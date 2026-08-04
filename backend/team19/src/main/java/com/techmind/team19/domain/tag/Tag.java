@@ -33,7 +33,7 @@ public class Tag {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public Tag(DadosTag dados) {
-        this.name = dados.name();
+    public Tag(String name) {
+        this.name = name;
     }
 }
