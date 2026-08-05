@@ -7,6 +7,7 @@ import com.techmind.team19.domain.tag.TagRepository;
 import com.techmind.team19.dto.DadosConsultaConteudos;
 import com.techmind.team19.dto.DadosRespostaConteudo;
 import com.techmind.team19.service.ConteudoStorageService;
+import com.techmind.team19.service.QueryTagService;
 import com.techmind.team19.service.ServiceDados;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -17,8 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -30,6 +29,9 @@ public class ApiController {
 
     @Autowired
     private ServiceDados serviceDados;
+
+    @Autowired
+    private QueryTagService tagService;
 
     @Autowired
     private QueryResultRepository resultRepository;
@@ -46,12 +48,7 @@ public class ApiController {
     public ResponseEntity<DadosRespostaConteudo> processar(@RequestBody @Valid DadosConsultaConteudos dados) {
 
         DadosRespostaConteudo resposta = serviceDados.chamarModeloDados(dados);
-        Set<Tag> tags = resposta.tags()
-                .stream()
-                .map(nome -> tagRepository.findByName(nome)
-                        .orElseGet(() -> tagRepository.save(new Tag(nome))))
-                .collect(Collectors.toSet());
-
+        var tags = tagService.SalvarTagRepository(resposta);
         var queryResult = new QueryResult(resposta, tags);
         resultRepository.save(queryResult);
 
@@ -60,7 +57,7 @@ public class ApiController {
 
     @Operation(summary = "Retorna a lista de consultas", description = "Chama o metodo listar() da classe ConteudoStorageService para listar os conteudos consultados.")
     @GetMapping("/conteudos")
-    public ResponseEntity<List<DadosRespostaConteudo>> listar() {
+    public ResponseEntity<List<QueryResult>> listar() {
         return ResponseEntity.ok(storageService.listar());
     }
 

@@ -1,11 +1,7 @@
 package com.techmind.team19.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.techmind.team19.domain.tag.DadosTag;
-import com.techmind.team19.domain.tag.Tag;
 import io.swagger.v3.oas.annotations.media.Schema;
-
-import java.util.List;
 import java.util.Set;
 
 public record DadosRespostaConteudo(

@@ -1,7 +1,6 @@
 package com.techmind.team19.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.techmind.team19.domain.tag.DadosTag;
 import com.techmind.team19.dto.DadosConsultaConteudos;
 import com.techmind.team19.dto.DadosRespostaConteudo;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,9 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
-import java.util.Set;
 
 @Service
 public class ServiceDados {
@@ -47,17 +43,7 @@ public class ServiceDados {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        /*
-        return restClient.post()
-                .uri(dadosUrl)
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .body(dados)
-                .retrieve()
-                .body(DadosRespostaConteudo.class);
-    }
 
-         */
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();

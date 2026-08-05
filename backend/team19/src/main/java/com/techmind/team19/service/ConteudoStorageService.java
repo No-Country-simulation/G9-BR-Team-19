@@ -1,22 +1,21 @@
 package com.techmind.team19.service;
 
+import com.techmind.team19.domain.queryResult.QueryResult;
+import com.techmind.team19.domain.queryResult.QueryResultRepository;
 import com.techmind.team19.dto.DadosRespostaConteudo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ConteudoStorageService {
 
-    private final List<DadosRespostaConteudo> conteudos = new ArrayList<>();
+    @Autowired
+    QueryResultRepository resultRepository;
 
-    public void salvar(DadosRespostaConteudo conteudo) {
-        conteudos.add(conteudo);
-    }
-
-    public List<DadosRespostaConteudo> listar() {
-        return conteudos;
+    public List<QueryResult> listar() {
+        return resultRepository.findAll();
     }
 
 }

@@ -27,10 +27,6 @@ public class QueryResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //private String title;
-
-    //private String Text;
-
     private String category;
 
     private Double probability;
@@ -58,9 +54,5 @@ public class QueryResult {
         this.probability = resposta.probability();
         this.summary = resposta.summary();
         this.tags = tags;
-        /*this.tags = resposta.tags()
-                .stream()
-                .map(Tag::new)
-                .collect(Collectors.toSet());*/
     }
 }
