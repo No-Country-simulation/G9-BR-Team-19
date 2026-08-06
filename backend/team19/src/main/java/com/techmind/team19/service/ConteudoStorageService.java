@@ -18,4 +18,10 @@ public class ConteudoStorageService {
         return resultRepository.findAll();
     }
 
+    public List<DadosRespostaConteudo> listarPorCategoria(String categoria) {
+        return conteudos.stream()
+                .filter(c-> c.categoria().equalsIgnoreCase(categoria))
+                .toList();
+    }
+
 }
