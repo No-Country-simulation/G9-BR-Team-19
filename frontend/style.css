@@ -1,7 +1,6 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Iceland', sans-serif;
   color: #ffffff;
 
   background-color: #0b0517;
@@ -105,4 +104,111 @@ body {
 .btn-user:hover {
   transform: translateY(-1px);
   background-color: #3b087a;
+}
+
+.content-container {
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.main-title {
+  font-family: 'Iceland', sans-serif;
+  font-size: 2.6rem;
+  font-weight: 400;
+  margin-bottom: 0.2rem;
+  letter-spacing: 1px;
+}
+
+.highlight {
+  color: #0B1EE8;
+}
+
+.subtitle {
+  font-family: 'Iceland', sans-serif;
+  color: #94a3b8;
+  font-size: 1.1rem;
+  margin-top: 0;
+}
+
+.dashboard-card {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2.5rem;
+
+  background-color: rgba(13, 8, 30, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-group label {
+  font-family: 'Iceland', sans-serif;
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+#form-analise input,
+#form-analise textarea {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  box-sizing: border-box;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+#form-analise input:focus,
+#form-analise textarea:focus {
+  border-color: rgba(11, 30, 232, 0.5);
+}
+
+#form-analise input::placeholder,
+#form-analise textarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+#form-analise textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+#btn-consultar {
+  width: 100%;
+  background: linear-gradient(180deg, #0a0b6b 0%, #0004c2 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-family: 'Iceland', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+  margin-top: 1rem;
+}
+
+#btn-consultar:hover {
+  opacity: 0.9;
+}
+
+#btn-consultar:active {
+  transform: scale(0.99);
 }

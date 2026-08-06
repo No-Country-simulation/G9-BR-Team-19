@@ -36,7 +36,28 @@
   </header>
 
   <main class="main-content">
+      <div class="content-container">
+        <h2 class="main-title">Organização Inteligente de <span class="highlight">Conhecimento Técnico</span></h2>
+        <p class="subtitle">Preencha as informações necessárias para organizar seus textos, facilitando sua classificação, consulta e reutilização</p>
+      </div>
 
+      <div class="dashboard-card">
+              <form id="form-analise">
+
+                <div class="form-group">
+                  <label for="titulo">Título</label>
+                  <input type="text" id="titulo" placeholder="Digite aqui o título...">
+                </div>
+
+                <div class="form-group">
+                  <label for="conteudo">Texto</label>
+                  <textarea id="conteudo" placeholder="Digite aqui o texto..."></textarea>
+                </div>
+
+                <button type="submit" id="btn-consultar">Consultar</button>
+
+              </form>
+            </div>
   </main>
 
   <script src="app.js"></script>
