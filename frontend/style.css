@@ -95,7 +95,8 @@ body {
   padding: 0.5rem 1rem;
   border-radius: 8px;
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
+  font-family: 'Iceland', sans-serif;
   cursor: pointer;
   box-shadow: 0 0 12px rgba(147, 51, 234, 0.15);
   transition: transform 0.2s ease, background-color 0.2s ease;
