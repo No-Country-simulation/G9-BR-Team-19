@@ -260,6 +260,12 @@ body {
   flex-direction: column;
   justify-content: space-between;
   padding: 2rem;
+  background-color: rgba(13, 8, 30, 0.4);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
 .resultado-grid {
@@ -278,6 +284,7 @@ body {
   border-radius: 10px;
   border: 1px solid #515664;
   padding: 1.5rem;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
@@ -309,37 +316,60 @@ body {
 }
 
 #res-categoria {
-  width: 100%;
-}
-
-.resumo-box,
-#res-resumo {
-  width: 100%;
-  min-height: 100px;
-  line-height: 1.4;
+  width: 416.94px;
+  height: 21px;
   border-radius: 10px;
   border: 1px solid #454A54;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  padding: 0 0.8rem;
+  font-size: 0.85rem;
+  color: #ffffff;
+
+}
+
+#res-resumo,
+.resumo-box {
+  width: 416.94px;
+  height: 135px;
+  border-radius: 10px;
+  border: 1px solid #454A54;
+  background: transparent;
+  color: #ffffff;
+  font-size: 0.9rem;
+  padding: 0.8rem 1rem;
+  box-sizing: border-box;
+  line-height: 1.4;
+  overflow-y: auto;  
 }
 
 .tags-wrapper {
-  width: 100%;
+  width: 414.94px;
   display: grid;
-  border-radius: 10px;
-  border: 1px solid #454A54;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem;
-  padding: 0.5rem;
+  grid-template-columns: repeat(2, 141px);
+  border: none;
+  background: transparent;
+  gap: 0.5rem 1rem;
+  padding: 0;
 }
 
 .tag-box {
-  background-color: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(168, 85, 247, 0.3);
-  border-radius: 8px;
-  padding: 0.5rem;
-  text-align: center;
+  width: 141px;
+  height: 21px;
+  border-radius: 10px;
+  border: 1px solid #454A54;
+  background: transparent;
+  color: #ffffff;
   font-size: 0.85rem;
-  color: #a855f7;
-  font-weight: 500;
+  box-sizing: border-box;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+ 
 }
 
 .resultado-ilustration {
@@ -391,28 +421,64 @@ body {
   transition: all 0.2s ease;
 }
 
+#btn-nova-analise,
 .btn-outline {
-  background: transparent;
+  width: 251px;
+  height: 50px;
+  background: linear-gradient(180deg, #0a0b6b 0%, #0004c2 100%);
   color: #ffffff;
-  border: 1px solid #0004c2;
-  box-shadow: 0 0 10px rgba(0, 4, 194, 0.3);
+  font-size: 1.2rem;
+  border-radius: 10px;
+  border: 1px solid #515664;
+  box-shadow: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+
 }
 
+#btn-nova-analise:hover,
 .btn-outline:hover {
-  background: rgba(0, 4, 194, 0.2);
+  opacity: 0.9;
+  background: (180deg, #0a0b6b 0%, #0004c2 100%);
 }
 
-.btn-gradient {
-  background: linear-gradient(90deg, #6366f1, #a855f7);
+#btn-nova-analise:active,
+.btn-outline:active {
+  transform: scale(0.98);
+}
+
+#btn-ver-bibliotech {
+  width: 251px;
+  height: 50px;
+  border-radius: 10px;
+  border:1px solid #515664;
+  background: linear-gradient(90deg, #800080 0%, #36005E 100%);  
   color: #ffffff;
-  border: none;
-  box-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
+  font-family: 'Iceland', sans-serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: o o 12px rgba(157, 78, 221, 0.35);
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease, transform 0.1s ease;
 }
 
-.btn-gradient:hover {
+#btn-ver-bibliotech:hover {
   opacity: 0.9;
   transform: translateY(-1px);
 }
+
+#btn-ver-bibliotech:active{
+  transform: scale(0.98);
+}
+
 
 /* ==========================================
    8. RESPONSIVIDADE
