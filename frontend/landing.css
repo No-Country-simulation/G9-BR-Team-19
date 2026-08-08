@@ -1,0 +1,228 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Iceland', sans-serif;;
+    background:#020617;
+    overflow:hidden;
+
+}
+
+.background{
+
+    width:100vw;
+    height:100vh;
+
+    background-image:url("https://github.com/No-Country-simulation/G9-BR-Team-19/blob/feature/frontend/frontend/assets/background.png?raw=true");
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+header{
+
+    height:80px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 50px;
+
+    background:rgba(6,7,20,.55);
+    backdrop-filter:blur(6px);
+
+}
+
+.logo{
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+}
+
+.logo img{
+
+    width:30px;
+
+}
+
+.logo span{
+
+    color:white;
+    font-size:14px;
+
+}
+
+.login{
+
+    width:90px;
+    height:32px;
+
+    border:none;
+
+    color:white;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    background:#5E1DBA;
+
+    transition:.3s;
+
+    font-family:inherit;
+
+}
+
+.login:hover{
+
+    background:#7231d6;
+
+}
+
+main{
+
+    flex:1;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 60px;
+
+}
+
+.left{
+
+    width:55%;
+
+}
+
+.left h1{
+
+    font-size:96px;
+
+    color:white;
+
+    margin-bottom:25px;
+
+    font-weight:500;
+
+}
+
+.left p{
+
+    width:640px;
+
+    color:white;
+
+    font-size:20px;
+
+    line-height:1.5;
+
+}
+
+.start {
+    display: block;
+    margin: 130px auto 0;
+
+    width: 230px;
+    height: 68px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.15);
+    background: linear-gradient(
+        180deg,
+        #4A1B90,
+        #351165
+    );
+    color: white;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 20px;
+    transition: .3s;
+    box-shadow: 0 0 20px rgba(118,56,255,.25);
+}
+
+.start:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 0 30px rgba(132,74,255,.55);
+
+}
+
+.right{
+
+    width:45%;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+.right img{
+
+    width:270px;
+
+    filter:drop-shadow(0 0 18px rgba(255,255,255,.15));
+
+}
+
+@media(max-width:1100px){
+
+    main{
+
+        flex-direction:column;
+
+        justify-content:center;
+
+        text-align:center;
+
+        gap:50px;
+
+    }
+
+    .left{
+
+        width:100%;
+
+    }
+
+    .left h1{
+
+        font-size:70px;
+
+    }
+
+    .left p{
+
+        width:100%;
+
+    }
+
+    .start{
+
+        margin-top:60px;
+
+    }
+
+    .right{
+
+        width:100%;
+
+    }
+
+}
