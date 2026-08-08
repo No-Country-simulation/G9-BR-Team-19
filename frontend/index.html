@@ -36,74 +36,76 @@
   </header>
 
   <main class="main-content">
-  <div class="content-container">
-    <h2 class="main-title">Organização Inteligente de <span class="highlight">Conhecimento Técnico</span></h2>
-    <p class="subtitle">Preencha as informações necessárias para organizar seus textos, facilitando sua classificação, consulta e reutilização</p>
-  </div>
-
-  
-  <div id="card-form-analise" class="dashboard-card hidden">
-    <form id="form-analise">
-
-      <div class="form-group">
-        <label for="titulo">Título</label>
-        <input type="text" id="titulo" placeholder="Digite aqui o título...">
-      </div>
-
-      <div class="form-group">
-        <label for="conteudo">Texto</label>
-        <textarea id="conteudo" placeholder="Digite aqui o texto..."></textarea>
-      </div>
-
-      <button type="submit" id="btn-consultar">Consultar</button>
-
-    </form>
-  </div>
-
-  
-  <div id="card-resultado-analise" class="dashboard-card">
-    <div class="resultado-grid">
-
-      
-      <div class="resultado-dados">
-        <div class="resultado-field">
-          <span class="field-label">Categoria:</span>
-          <div class="field-box" id="res-categoria">Engenharia de Software</div>
-        </div>
-
-        <div class="resultado-field">
-          <span class="field-label">Tags:</span>
-          <div class="tags-wrapper">
-            <span class="tag-box">#Backend</span>
-            <span class="tag-box">#Java</span>
-            <span class="tag-box">#SpringBoot</span>
-            <span class="tag-box">#API</span>
-          </div>
-        </div>
-
-        <div class="resultado-field">
-          <span class="field-label">Resumo:</span>
-          <div class="field-box resumo-box" id="res-resumo">
-            O texto aborda padrões de arquitetura de software focada em escalabilidade e manutenção de código limpo
-          </div>
-        </div>
-      </div>
-
-    
-      <div class="resultado-ilustration">
-        <img src="./assets/knowledge.png" alt="ilustração de conhecimento" class="book-asset">
-      </div>
-
+    <div class="content-container">
+      <h2 class="main-title">Organização Inteligente de <span class="highlight">Conhecimento Técnico</span></h2>
+      <p class="subtitle">Preencha as informações necessárias para organizar seus textos, facilitando sua classificação, consulta e reutilização</p>
     </div>
 
-    
-    <div class="resultado-actions">
-      <button id="btn-nova-analise" class="btn-action btn-outline">Fazer nova análise</button>
-      <button id="btn-ver-bibliotech" class="btn-action btn-gradient">Ver na Bibliotech</button>
-    </div>
-  </div>
+    <div id="card-form-analise" class="dashboard-card hidden">
+      <form id="form-analise">
+        <div class="form-group">
+          <label for="titulo">Título</label>
+          <input type="text" id="titulo" placeholder="Digite aqui o título...">
+        </div>
 
-</main>
+        <div class="form-group">
+          <label for="conteudo">Texto</label>
+          <textarea id="conteudo" placeholder="Digite aqui o texto..."></textarea>
+        </div>
+
+        <button type="submit" id="btn-consultar">Consultar</button>
+      </form>
+    </div>
+
+    <div id="card-resultado-analise" class="dashboard-card">
+      <div class="card-inner">
+        
+        <div class="card-front">
+          <div class="resultado-grid">
+            <div class="resultado-dados">
+              <div class="resultado-field">
+                <span class="field-label">Categoria:</span>
+                <div class="field-box" id="res-categoria">Engenharia de Software</div>
+              </div>
+
+              <div class="resultado-field">
+                <span class="field-label">Tags:</span>
+                <div class="tags-wrapper">
+                  <span class="tag-box">#Backend</span>
+                  <span class="tag-box">#Java</span>
+                  <span class="tag-box">#SpringBoot</span>
+                  <span class="tag-box">#API</span>
+                </div>
+              </div>
+
+              <div class="resultado-field">
+                <span class="field-label">Resumo:</span>
+                <div class="field-box resumo-box" id="res-resumo">
+                  O texto aborda...
+                </div>
+              </div>
+            </div>
+
+            <div class="resultado-ilustration">
+              <img src="./assets/knowledge.png" alt="ilustração de conhecimento" class="book-asset">
+            </div>
+          </div>
+
+          <div class="resultado-actions">
+            <button id="btn-nova-analise" class="btn-action btn-outline">Fazer nova análise</button>
+            <button id="btn-ver-bibliotech" class="btn-action btn-gradient">Ver na Bibliotech</button>
+          </div>
+        </div> 
+
+        <div class="card-back">
+          <h2>Detalhes Adicionais</h2>
+          <p>Conteúdo do verso do card.</p>
+        </div> 
+
+      </div> 
+    </div> 
+
+  </main>
   <script src="app.js"></script>
 </body>
 </html>

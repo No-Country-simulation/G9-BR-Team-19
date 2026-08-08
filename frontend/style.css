@@ -251,21 +251,81 @@ body {
 /* ==========================================
    6. DASHBOARD DE RESULTADO DE ANÁLISE
    ========================================== */
-#card-resultado-analise {
+/* Container Pai */
+#card-resultado-analise,
+.dashboard-card {
   width: 100%;
   max-width: 954px;
-  min-height: 500px;
+  height: 500px; /* Altura fixa necessária para o absolute dos filhos funcionar */
   margin: 2rem auto 0 auto;
+  position: relative;
+  perspective: 1000px;
+  
+  /* Zera o fundo e as bordas do pai para a barra roxa sumir */
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Estrutura interna de rotação */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+
+/* Classe acionada via JS quando o card é virado */
+.card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+#card-resultado-analise:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* Oculta o verso na rotação */
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+  
+  /* Cor translúcida acinzentada/azulada com efeito glassmorphism */
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  
+  /* Borda suave e cantos arredondados */
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  
+  padding: 2rem;
+  box-sizing: border-box;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 2rem;
-  background-color: rgba(13, 8, 30, 0.4);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.card-front {
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
 }
 
 .resultado-grid {
@@ -444,7 +504,7 @@ body {
 #btn-nova-analise:hover,
 .btn-outline:hover {
   opacity: 0.9;
-  background: (180deg, #0a0b6b 0%, #0004c2 100%);
+  background: linear-gradient(180deg, #0a0b6b 0%, #0004c2 100%);
 }
 
 #btn-nova-analise:active,
@@ -462,7 +522,7 @@ body {
   font-family: 'Iceland', sans-serif;
   font-size: 1.2rem;
   cursor: pointer;
-  box-shadow: o o 12px rgba(157, 78, 221, 0.35);
+  box-shadow: 0 0 12px rgba(157, 78, 221, 0.35);
   padding: 0;
   display: inline-flex;
   align-items: center;
