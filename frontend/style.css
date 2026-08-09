@@ -36,11 +36,6 @@ body {
   z-index: 10;
 }
 
-.techmind-title {
-    font-family: 'Iceland', sans-serif;
-    font-size: 1.5rem;
-}
-
 .logo {
   display: flex;
   align-items: center;
@@ -53,6 +48,11 @@ body {
 .logo-icon {
   width: 35px;
   height: auto;
+}
+
+.techmind-title {
+  font-family: 'Iceland', sans-serif;
+  font-size: 1.5rem;
 }
 
 .nav-tabs {
@@ -119,6 +119,9 @@ body {
   background-color: #3b087a;
 }
 
+/* ==========================================
+   3. CONTEÚDO PRINCIPAL (MAIN & HERO)
+   ========================================== */
 .content-container {
   text-align: center;
   margin-top: 3rem;
@@ -153,12 +156,29 @@ body {
   margin-top: 0;
 }
 
+.hero-section {
+  width: 100%;
+  max-width: 1229px;
+  height: 650px;
+  margin: 0.5rem auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.hero-section p {
+  margin-bottom: 0px;
+}
+
+/* ==========================================
+   4. ESTRUTURA DOS CARDS
+   ========================================== */
 .dashboard-card {
   width: 100%;
   max-width: 700px;
   margin: 0 auto;
   padding: 2.5rem;
-
   background-color: rgba(13, 8, 30, 0.4);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -167,6 +187,9 @@ body {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
+/* ==========================================
+   5. FORMULÁRIO DE ANÁLISE
+   ========================================== */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -191,7 +214,6 @@ body {
   padding: 1rem;
   border-radius: 8px;
   font-family: 'Segoe UI', Roboto, sans-serif;
-  box-sizing: border-box;
   font-size: 0.95rem;
   outline: none;
   transition: border-color 0.3s ease;
@@ -233,4 +255,326 @@ body {
 
 #btn-consultar:active {
   transform: scale(0.99);
+}
+
+/* ==========================================
+   6. DASHBOARD DE RESULTADO DE ANÁLISE
+   ========================================== */
+/* Container Pai */
+#card-resultado-analise,
+.dashboard-card {
+  width: 100%;
+  max-width: 954px;
+  height: 500px; /* Altura fixa necessária para o absolute dos filhos funcionar */
+  margin: 2rem auto 0 auto;
+  position: relative;
+  perspective: 1000px;
+  
+  /* Zera o fundo e as bordas do pai para a barra roxa sumir */
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Estrutura interna de rotação */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+
+/* Classe acionada via JS quando o card é virado */
+.card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+#card-resultado-analise:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* Oculta o verso na rotação */
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+  
+  /* Cor translúcida acinzentada/azulada com efeito glassmorphism */
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  
+  /* Borda suave e cantos arredondados */
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  
+  padding: 2rem;
+  box-sizing: border-box;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-front {
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.resultado-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.resultado-dados {
+  background: linear-gradient(180deg, #2a2d42 0%, #17192e 100%);
+  width: 100%;
+  max-width: 447px;
+  min-height: 348px;
+  border-radius: 10px;
+  border: 1px solid #515664;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  text-align: left;
+}
+
+.resultado-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field-label {
+  font-family: 'Iceland', sans-serif;
+  font-size: 1.2rem;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+.field-box {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  box-shadow: inset 0 0 8px rgba(168, 85, 247, 0.1);
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  color: #e2e8f0;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  font-size: 0.95rem;
+}
+
+#res-categoria {
+  width: 416.94px;
+  height: 21px;
+  border-radius: 10px;
+  border: 1px solid #454A54;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  padding: 0 0.8rem;
+  font-size: 0.85rem;
+  color: #ffffff;
+
+}
+
+#res-resumo,
+.resumo-box {
+  width: 416.94px;
+  height: 135px;
+  border-radius: 10px;
+  border: 1px solid #454A54;
+  background: transparent;
+  color: #ffffff;
+  font-size: 0.9rem;
+  padding: 0.8rem 1rem;
+  box-sizing: border-box;
+  line-height: 1.4;
+  overflow-y: auto;  
+}
+
+.tags-wrapper {
+  width: 414.94px;
+  display: grid;
+  grid-template-columns: repeat(2, 141px);
+  border: none;
+  background: transparent;
+  gap: 0.5rem 1rem;
+  padding: 0;
+}
+
+.tag-box {
+  width: 141px;
+  height: 21px;
+  border-radius: 10px;
+  border: 1px solid #454A54;
+  background: transparent;
+  color: #ffffff;
+  font-size: 0.85rem;
+  box-sizing: border-box;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+ 
+}
+
+.resultado-ilustration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.book-asset, 
+#book-asset {
+  width: 254px;
+  height: 254px;
+  opacity: 0.9;
+  object-fit: cover;
+}
+
+.tech-icon {
+  width: 180px;
+  height: 180px;
+  stroke: #6366f1;
+  filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.5));
+}
+
+.output-container, 
+#output {
+  width: 100%;
+  max-width: 835px;
+  min-height: 348px;
+}
+
+/* ==========================================
+   7. BOTÕES DE AÇÃO DO PAINEL
+   ========================================== */
+.resultado-actions {
+  display: flex;
+  justify-content: space-around;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.btn-action {
+  flex: 1;
+  max-width: 250px;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-family: 'Iceland', sans-serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#btn-nova-analise,
+.btn-outline {
+  width: 251px;
+  height: 50px;
+  background: linear-gradient(180deg, #0a0b6b 0%, #0004c2 100%);
+  color: #ffffff;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  border: 1px solid #515664;
+  box-shadow: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+
+}
+
+#btn-nova-analise:hover,
+.btn-outline:hover {
+  opacity: 0.9;
+  background: linear-gradient(180deg, #0a0b6b 0%, #0004c2 100%);
+}
+
+#btn-nova-analise:active,
+.btn-outline:active {
+  transform: scale(0.98);
+}
+
+#btn-ver-bibliotech {
+  width: 251px;
+  height: 50px;
+  border-radius: 10px;
+  border:1px solid #515664;
+  background: linear-gradient(90deg, #800080 0%, #36005E 100%);  
+  color: #ffffff;
+  font-family: 'Iceland', sans-serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(157, 78, 221, 0.35);
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+#btn-ver-bibliotech:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+#btn-ver-bibliotech:active{
+  transform: scale(0.98);
+}
+
+
+/* ==========================================
+   8. RESPONSIVIDADE
+   ========================================== */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    height: auto;
+  }
+
+  .resultado-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .resultado-ilustration {
+    order: -1;
+  }
+
+  .resultado-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-action {
+    width: 100%;
+    max-width: none;
+  }
 }
