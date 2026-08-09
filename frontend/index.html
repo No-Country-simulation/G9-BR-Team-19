@@ -11,76 +11,102 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="background-wrapper">
-        <header class="header">
-            <div class="logo">
-                <img src="assets/brain.png" alt="Logo" class="logo-icon">
-                <span class="techmind-title">TechMind</span>
+
+  <div class="background-wrapper">
+    <header class="header">
+      <div class="logo">
+        <img src="assets/brain.png" alt="Logo" class="logo-icon">
+        <span class="techmind-title">TechMind</span>
+      </div>
+
+      <nav class="nav-tabs">
+        <button class="tab-btn active" data-target="tab-nova-analise">Nova Análise</button>
+        <button class="tab-btn" data-target="tab-bibliotech">Bibliotech</button>
+        <button class="tab-btn" data-target="tab-metricas">Métricas</button>
+      </nav>
+
+      <div class="user-area">
+        <button id="btn-login-modal" class="btn-user">
+          Usuário
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="content-container">
+        <h2 class="main-title">Organização Inteligente de <span class="highlight">Conhecimento Técnico</span></h2>
+        <p class="subtitle">Preencha as informações necessárias para organizar seus textos, facilitando sua classificação, consulta e reutilização</p>
+      </div>
+
+      <!-- container p/ flipar -->
+      <div class="flip-card-container">
+        <div id="main-flip-card" class="flip-card-inner">
+
+          <!-- lado de input -->
+          <div class="card-face card-front">
+            <form id="form-analise">
+              <div class="form-group">
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" placeholder="Digite aqui o título...">
+              </div>
+
+              <div class="form-group">
+                <label for="conteudo">Texto</label>
+                <textarea id="conteudo" placeholder="Digite aqui o texto..."></textarea>
+              </div>
+
+              <button type="submit" id="btn-consultar">Consultar</button>
+            </form>
+          </div>
+
+          <!-- lado dos resultados -->
+          <div class="card-face card-back">
+            <div class="resultado-grid">
+              <div class="resultado-dados">
+                <div class="resultado-field">
+                  <span class="field-label">Categoria:</span>
+                  <div class="field-box" id="res-categoria">Engenharia de Software</div>
+                </div>
+
+                <div class="resultado-field">
+                  <span class="field-label">Tags:</span>
+                  <div class="tags-wrapper">
+                    <span class="tag-box">#Backend</span>
+                    <span class="tag-box">#Java</span>
+                    <span class="tag-box">#SpringBoot</span>
+                    <span class="tag-box">#API</span>
+                  </div>
+                </div>
+
+                <div class="resultado-field">
+                  <span class="field-label">Resumo:</span>
+                  <div class="field-box resumo-box" id="res-resumo">
+                    O texto aborda...
+                  </div>
+                </div>
+              </div>
+
+              <div class="resultado-illustration">
+                <img src="./assets/knowledge.png" alt="ilustração de conhecimento" class="book-asset">
+              </div>
             </div>
 
-            <nav class="nav-tabs">
-                <button class="tab-btn active" data-target="tab-nova-analise">Nova Análise</button>
-                <button class="tab-btn" data-target="tab-bibliotech">Bibliotech</button>
-                <button class="tab-btn" data-target="tab-metricas">Métricas</button>
-            </nav>
-
-            <div class="user-area">
-                <button id="btn-login-modal" class="btn-user">
-                    Usuário
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                </button>
-            </div>
-        </header>
-
-        <main class="main-content">
-            <div class="content-container">
-                <h2 class="main-title">Organização Inteligente de <span class="highlight">Conhecimento Técnico</span></h2>
-                <p class="subtitle">Preencha as informações necessárias para organizar seus textos, facilitando sua classificação, consulta e reutilização</p>
-            </div>
-
-            <div class="dashboard-card">
-                    <form id="form-analise">
-
-                        <div class="form-group">
-                        <label for="titulo">Título</label>
-                        <input type="text" id="titulo" placeholder="Digite aqui o título...">
-                        </div>
-
-                        <div class="form-group">
-                        <label for="conteudo">Texto</label>
-                        <textarea id="conteudo" placeholder="Digite aqui o texto..."></textarea>
-                        </div>
-
-                        <button type="submit" id="btn-consultar">Consultar</button>
-
-                    </form>
-                    </div>
-        </main>
-    </div>
-
-            <div class="resultado-ilustration">
-              <img src="./assets/knowledge.png" alt="ilustração de conhecimento" class="book-asset">
+            <div class="resultado-actions">
+              <button type="button" id="btn-nova-analise" class="btn-action btn-outline">Fazer nova análise</button>
+              <button type="button" id="btn-ver-bibliotech" class="btn-action btn-gradient">Ver na Bibliotech</button>
             </div>
           </div>
 
-          <div class="resultado-actions">
-            <button id="btn-nova-analise" class="btn-action btn-outline">Fazer nova análise</button>
-            <button id="btn-ver-bibliotech" class="btn-action btn-gradient">Ver na Bibliotech</button>
-          </div>
-        </div> 
+        </div>
+      </div>
 
-        <div class="card-back">
-          <h2>Detalhes Adicionais</h2>
-          <p>Conteúdo do verso do card.</p>
-        </div> 
+    </main>
+  </div>
 
-      </div> 
-    </div> 
-
-  </main>
   <script src="app.js"></script>
 </body>
 </html>
