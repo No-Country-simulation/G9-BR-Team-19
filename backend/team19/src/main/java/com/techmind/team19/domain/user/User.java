@@ -33,7 +33,7 @@ public class User implements UserDetails {
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    private String senha;
+    private String password;
 
     @Column(name = "created_at", updatable = false)
     @CreationTimestamp
@@ -43,6 +43,12 @@ public class User implements UserDetails {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    public User(String email, String password, String name) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
@@ -50,7 +56,7 @@ public class User implements UserDetails {
 
     @Override
     public @Nullable String getPassword() {
-        return senha;
+        return password;
     }
 
     @Override
