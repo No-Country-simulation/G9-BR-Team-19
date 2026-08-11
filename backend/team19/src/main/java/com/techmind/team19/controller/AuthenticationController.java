@@ -1,9 +1,7 @@
 package com.techmind.team19.controller;
 
-import com.techmind.team19.domain.user.AuthenticationDTO;
-import com.techmind.team19.domain.user.RegisterDTO;
-import com.techmind.team19.domain.user.User;
-import com.techmind.team19.domain.user.UserRepository;
+import com.techmind.team19.domain.user.*;
+import com.techmind.team19.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +20,17 @@ public class AuthenticationController {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping("/entrar")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/cadastrar")
