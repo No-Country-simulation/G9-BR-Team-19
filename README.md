@@ -34,6 +34,7 @@ O **TechMind** é uma solução completa (Frontend Web, Aplicativo Mobile, Backe
 ### 🎯 Objetivos
 
 ---
+
 A aplicação integra interfaces de usuário (Web SPA e Mobile Flutter), uma camada intermediária REST em Spring Boot e uma API de Machine Learning em Python.
 
 Seu papel é:
