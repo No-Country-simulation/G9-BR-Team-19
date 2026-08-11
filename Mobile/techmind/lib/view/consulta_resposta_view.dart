@@ -43,18 +43,21 @@ class ConsultaRespostaView extends StatelessWidget {
                       'Categoria',
                       resposta.categoria,
                       Icons.category,
+                      context.largura * 0.45,
                     ),
                     cardResultado(
                       context,
                       'Probabilidade',
                       resposta.probabilidade.toString(),
                       Icons.percent,
+                      context.largura * 0.45,
                     ),
                     cardResultado(
                       context,
                       'Resumo',
                       resposta.resumo,
                       Icons.description,
+                      context.largura * 0.92,
                     ),
                   ],
                 ),
@@ -99,11 +102,12 @@ class ConsultaRespostaView extends StatelessWidget {
     String label,
     String resposta,
     IconData icone,
+    double largura,
   ) {
     return Container(
       constraints: BoxConstraints(minHeight: 125),
       // height: 125,
-      width: context.largura * 0.45,
+      width: largura,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: Color(0x37373726),

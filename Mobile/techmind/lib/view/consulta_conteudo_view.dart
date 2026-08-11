@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:techmind/config/app_size.dart';
+import 'package:techmind/config/env.dart';
 import 'package:techmind/models/consulta_conteudo.dart';
 import 'package:techmind/shared/widgets/botao_form.dart';
 import 'package:techmind/shared/widgets/input_form.dart';
@@ -19,6 +20,8 @@ class _ConsultaConteudoViewState extends State<ConsultaConteudoView> {
 
   TextEditingController ctrTitulo = TextEditingController();
   TextEditingController ctrTexto = TextEditingController();
+
+  TextEditingController ipController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final vm = context.watch<ConsultaConteudoViewmodels>();
@@ -60,6 +63,24 @@ class _ConsultaConteudoViewState extends State<ConsultaConteudoView> {
               const Divider(),
               ListTile(title: Text("Métricas"), onTap: () {}),
               const Divider(),
+
+              TextField(
+                controller: ipController,
+                decoration: const InputDecoration(
+                  labelText: "IP do servidor",
+                  hintText: "Ex: 192.168.1.50:8080",
+                ),
+              ),
+
+              ElevatedButton(
+                onPressed: () {
+                  Env.customApiUrl = "http://${ipController.text}/api";
+
+                  Navigator.pop(context);
+                  print(Env.baseUrl);
+                },
+                child: const Text("Salvar"),
+              ),
 
               Expanded(
                 child: Align(
@@ -164,7 +185,11 @@ class _ConsultaConteudoViewState extends State<ConsultaConteudoView> {
                           maxLine: 6,
                         ),
                         vm.carregar
-                            ? Center(child: CircularProgressIndicator())
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                  color: const Color(0xFF000EA7),
+                                ),
+                              )
                             : BotaoForm(
                                 label: "Consultar",
                                 onPressed: () async {
@@ -186,12 +211,54 @@ class _ConsultaConteudoViewState extends State<ConsultaConteudoView> {
                                     if (resposta != null) {
                                       Navigator.push(
                                         context,
-                                        MaterialPageRoute(
-                                          builder: (_) => ConsultaRespostaView(
-                                            resposta: resposta,
+                                        PageRouteBuilder(
+                                          pageBuilder:
+                                              (
+                                                context,
+                                                animation,
+                                                secondaryAnimation,
+                                              ) => ConsultaRespostaView(
+                                                resposta: resposta,
+                                              ),
+                                          transitionsBuilder:
+                                              (
+                                                context,
+                                                animation,
+                                                secondaryAnimation,
+                                                child,
+                                              ) {
+                                                const begin = Offset(1.0, 0.0);
+                                                const end = Offset.zero;
+                                                const curve = Curves.easeInOut;
+
+                                                final tween =
+                                                    Tween(
+                                                      begin: begin,
+                                                      end: end,
+                                                    ).chain(
+                                                      CurveTween(curve: curve),
+                                                    );
+
+                                                return SlideTransition(
+                                                  position: animation.drive(
+                                                    tween,
+                                                  ),
+                                                  child: child,
+                                                );
+                                              },
+                                          transitionDuration: const Duration(
+                                            milliseconds: 500,
                                           ),
                                         ),
                                       );
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (_) => ConsultaRespostaView(
+                                      //       resposta: resposta,
+                                      //     ),
+                                      //   ),
+                                      // );
                                     }
                                   }
                                 },
