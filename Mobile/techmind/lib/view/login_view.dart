@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:techmind/shared/widgets/botao_form.dart';
 import 'package:techmind/shared/widgets/input_form.dart';
+import 'package:techmind/view/cadastro_view.dart';
 import 'package:techmind/view/consulta_conteudo_view.dart';
 
 class LoginView extends StatelessWidget {
@@ -40,7 +41,43 @@ class LoginView extends StatelessWidget {
                       "Ainda não possui um conta?",
                       style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1)),
                     ),
-                    TextButton(onPressed: () {}, child: Text("Cadastrar-se")),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) =>
+                                    CadastroView(),
+                            transitionsBuilder:
+                                (
+                                  context,
+                                  animation,
+                                  secondaryAnimation,
+                                  child,
+                                ) {
+                                  const begin = Offset(1.0, 0.0);
+                                  const end = Offset.zero;
+                                  const curve = Curves.easeInOut;
+
+                                  final tween = Tween(
+                                    begin: begin,
+                                    end: end,
+                                  ).chain(CurveTween(curve: curve));
+
+                                  return SlideTransition(
+                                    position: animation.drive(tween),
+                                    child: child,
+                                  );
+                                },
+                            transitionDuration: const Duration(
+                              milliseconds: 500,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text("Cadastrar-se"),
+                    ),
                   ],
                 ),
                 InputForm(
@@ -60,11 +97,31 @@ class LoginView extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => ConsultaConteudoView()),
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            ConsultaConteudoView(),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                              const begin = Offset(1.0, 0.0);
+                              const end = Offset.zero;
+                              const curve = Curves.easeInOut;
+
+                              final tween = Tween(
+                                begin: begin,
+                                end: end,
+                              ).chain(CurveTween(curve: curve));
+
+                              return SlideTransition(
+                                position: animation.drive(tween),
+                                child: child,
+                              );
+                            },
+                        transitionDuration: const Duration(milliseconds: 500),
+                      ),
                     );
                   },
-                  gradient1: Color(0xFF000EA7),
-                  gradient2: Color(0xFF000541),
+                  gradient1: const Color(0xFF000EA7),
+                  gradient2: const Color(0xFF000541),
                 ),
               ],
             ),
