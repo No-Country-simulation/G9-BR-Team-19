@@ -11,7 +11,8 @@ body {
   font-family: 'Iceland', sans-serif;
   color: #ffffff;
   background-color: #020617; /* Fallback */
-  overflow: hidden;
+  overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+  overflow-y: auto;   /* Permite rolagem quando necessário */
   width: 100vw;
   height: 100vh;
 }
@@ -63,7 +64,8 @@ body {
   font-size: 1.1rem;
 }
 
-.logo-img, .logo-icon {
+.logo-img, 
+.logo-icon {
   width: 35px;
   height: auto;
 }
@@ -79,12 +81,11 @@ body {
 .login-btn-landing {
   width: 90px;
   height: 32px;
-  border: none;
   color: white;
   border-radius: 6px;
   cursor: pointer;
   background: linear-gradient(180deg, #4A1B90, #351165);
-  transition: .3s;
+  transition: 0.3s;
   font-family: inherit;
   font-size: 1.2rem;
   border: 1px solid rgba(168, 85, 247, 0.4);
@@ -191,19 +192,19 @@ body {
   width: 230px;
   height: 75px;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   background: linear-gradient(180deg, #4A1B90, #351165);
   color: white;
   cursor: pointer;
   font-family: inherit;
   font-size: 1.7rem;
-  transition: .3s;
-  box-shadow: 0 0 20px rgba(118,56,255,.25);
+  transition: 0.3s;
+  box-shadow: 0 0 20px rgba(118, 56, 255, 0.25);
 }
 
 .start:hover {
   transform: translateY(-3px);
-  box-shadow: 0 0 30px rgba(132,74,255,.55);
+  box-shadow: 0 0 30px rgba(132, 74, 255, 0.55);
 }
 
 .hero-content .right {
@@ -215,19 +216,7 @@ body {
 .hero-content .right img {
   width: 220px;
   margin-top: 85px;
-  filter: drop-shadow(0 0 18px rgba(255,255,255,.15));
-}
-
-@media(max-width: 1100px) {
-  .landing-main {
-    flex-direction: column;
-    text-align: center;
-    gap: 50px;
-  }
-  .hero-content { flex-direction: column; }
-  .hero-content .left, .hero-content .right { width: 100%; }
-  .hero-content .left h1 { font-size: 70px; }
-  .start { margin-top: 60px; }
+  filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.15));
 }
 
 /* ==========================================
@@ -277,7 +266,7 @@ body {
 .flip-card-container {
   width: 100%;
   max-width: 780px;
-  height: 520px;
+  min-height: 520px;
   perspective: 1200px;
 }
 
@@ -308,6 +297,7 @@ body {
   border-radius: 16px;
   padding: 2.5rem;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  overflow-y: auto;
 }
 
 /* Lado Frontal (Formulário) */
@@ -485,7 +475,6 @@ body {
   font-weight: 300;
 }
 
-
 /* ==========================================
    MODAIS DE AUTENTICAÇÃO
    ========================================== */
@@ -552,7 +541,7 @@ body {
   align-items: flex-start;
   padding: 50px 60px;
   background: #ffffff;
-  color: #333333; /* Corrigir visibilidade no lado claro */
+  color: #333333;
 }
 
 .close-modal {
@@ -660,12 +649,121 @@ body {
   box-shadow: 0 8px 20px rgba(98, 36, 201, 0.35);
 }
 
-/* Responsividade de Modais */
-@media (max-width: 950px) {
-  .auth-modal { width: 90vw; }
+/* ==========================================
+   RESPONSIVIDADE & MEDIA QUERIES
+   ========================================== */
+
+/* Notebooks Grandes (até 1200px) */
+@media (max-width: 1200px) {
+  .hero-content .left h1 {
+    font-size: 4.5rem;
+  }
+  .hero-content .left p {
+    font-size: 1.5rem;
+  }
 }
-@media (max-width: 700px) {
-  .modal-overlay { padding: 20px; }
+
+/* Notebooks Médios e Tablets (até 992px) */
+@media (max-width: 992px) {
+  .header {
+    padding: 1rem 1.5rem;
+  }
+
+  .nav-tabs {
+    gap: 1rem;
+  }
+
+  .tab-btn {
+    font-size: 1rem;
+  }
+
+  .landing-main {
+    padding: 2rem 1.5rem;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-content .left,
+  .hero-content .right {
+    width: 100%;
+    align-items: center;
+  }
+
+  .hero-content .left h1 {
+    font-size: 3.8rem;
+  }
+
+  .hero-content .left p {
+    font-size: 1.3rem;
+  }
+
+  .hero-content .right img {
+    margin-top: 30px;
+    width: 180px;
+  }
+
+  .start {
+    margin-top: 40px;
+  }
+
+  .resultado-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .resultado-illustration {
+    display: none;
+  }
+}
+
+/* Mobile Large (até 768px) */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    height: auto;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .app-main {
+    padding: 1rem 0.5rem;
+  }
+
+  .main-title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .flip-card-container {
+    height: auto;
+    min-height: 560px;
+  }
+
+  .card-face {
+    padding: 1.2rem;
+  }
+
+  .resultado-actions {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .btn-action {
+    width: 100%;
+  }
+
+  .modal-overlay {
+    padding: 15px;
+  }
+
   .auth-modal {
     width: 100%;
     max-width: 450px;
@@ -673,6 +771,42 @@ body {
     min-height: 520px;
     grid-template-columns: 1fr;
   }
-  .modal-left { display: none; }
-  .modal-right { padding: 50px 30px; }
+
+  .modal-left {
+    display: none;
+  }
+
+  .modal-right {
+    padding: 40px 25px;
+  }
+
+  .modal-right h1 {
+    font-size: 2.2rem;
+  }
+}
+
+/* Mobile Small (até 480px) */
+@media (max-width: 480px) {
+  .hero-content .left h1 {
+    font-size: 2.8rem;
+  }
+
+  .hero-content .left p {
+    font-size: 1.1rem;
+  }
+
+  .start {
+    width: 100%;
+    max-width: 200px;
+    height: 60px;
+    font-size: 1.4rem;
+  }
+
+  .tags-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .placeholder-box h2 {
+    font-size: 2rem;
+  }
 }
