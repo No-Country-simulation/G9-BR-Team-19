@@ -4,6 +4,8 @@ import com.techmind.team19.domain.queryResult.QueryResult;
 import com.techmind.team19.domain.queryResult.QueryResultRepository;
 import com.techmind.team19.domain.tag.Tag;
 import com.techmind.team19.domain.tag.TagRepository;
+import com.techmind.team19.domain.user.User;
+import com.techmind.team19.domain.user.UserRepository;
 import com.techmind.team19.dto.DadosConsultaConteudos;
 import com.techmind.team19.dto.DadosRespostaConteudo;
 import com.techmind.team19.service.ConteudoStorageService;
@@ -15,6 +17,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,32 +42,35 @@ public class ApiController {
     @Autowired
     private TagRepository tagRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Operation(summary = "Processa um Conteúdo", description = "Recebe um título e um texto, envia para o modelo de IA e retorna o resultado.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Conteúdo enviado com sucesso."),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor.")
     })
     @PostMapping("/conteudos/processar")
-    public ResponseEntity<DadosRespostaConteudo> processar(@RequestBody @Valid DadosConsultaConteudos dados) {
+    public ResponseEntity<DadosRespostaConteudo> processar(@RequestBody @Valid DadosConsultaConteudos dados, Authentication authentication) {
 
         DadosRespostaConteudo resposta = serviceDados.chamarModeloDados(dados);
+
         var tags = tagService.SalvarTagRepository(resposta);
-        var queryResult = new QueryResult(resposta, tags);
+
+        User user = userRepository
+                .findEntityByEmail(authentication.getName())
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        var queryResult = new QueryResult(resposta, tags, user);
         resultRepository.save(queryResult);
 
         return ResponseEntity.ok(resposta);
     }
 
-    @Operation(summary = "Retorna a lista de consultas", description = "Chama o metodo listar() da classe ConteudoStorageService para listar os conteudos consultados.")
-    @GetMapping("/conteudos")
-    public ResponseEntity<List<QueryResult>> listar() {
-        return ResponseEntity.ok(storageService.listar());
+    @Operation(summary = "Retorna a lista de consultas do usuário logado", description = "Chama o metodo listarBiblioteca() da classe ConteudoStorageService para listar os conteudos referente ao usuário logado.")
+    @GetMapping("/biblioteca")
+    public ResponseEntity<List<QueryResult>> biblioteca(Authentication authentication) {
+        return ResponseEntity.ok(storageService.listarBiblioteca(authentication));
     }
 
-    /*
-    @GetMapping("/conteudos/categoria/{categoria}")
-    public ResponseEntity<List<DadosRespostaConteudo>> listarPorCategoria(
-            @PathVariable String categoria) {
-        return ResponseEntity.ok(storageService.listarPorCategoria(categoria));
-    }*/
 }
