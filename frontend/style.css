@@ -10,10 +10,10 @@
 body {
   font-family: 'Iceland', sans-serif;
   color: #ffffff;
-  background-color: #020617; /* Fallback */
-  overflow: hidden;
-  width: 100vw;
-  height: 100vh;
+  background-color: #020617;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
 }
 
 /* SPA Utils */
@@ -23,7 +23,7 @@ body {
 
 .view {
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -660,19 +660,127 @@ body {
   box-shadow: 0 8px 20px rgba(98, 36, 201, 0.35);
 }
 
-/* Responsividade de Modais */
+/* responsividade */
+
 @media (max-width: 950px) {
-  .auth-modal { width: 90vw; }
+  .landing-main {
+    padding: 2rem 1.5rem;
+    gap: 40px;
+  }
+
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .hero-content .left,
+  .hero-content .right {
+    width: 100%;
+    align-items: center;
+  }
+
+  .hero-content .left h1 {
+    font-size: 4rem;
+  }
+
+  .hero-content .left p {
+    font-size: 1.3rem;
+  }
+
+  .start {
+    margin-top: 2rem;
+  }
+
+  .hero-content .right img {
+    margin-top: 0;
+  }
 }
+
 @media (max-width: 700px) {
-  .modal-overlay { padding: 20px; }
+  .header {
+    padding: 0.8rem 1rem;
+  }
+
+  .nav-tabs {
+    gap: 1rem;
+  }
+
+  .tab-btn {
+    font-size: 1rem;
+  }
+
+  .main-title {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .flip-card-container {
+    height: auto;
+    min-height: 520px;
+  }
+
+  .card-face {
+    padding: 1.5rem;
+  }
+
+  .resultado-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .resultado-illustration {
+    order: -1;
+  }
+
+  .book-asset {
+    width: 120px;
+  }
+
+  .resultado-actions {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .btn-action {
+    width: 100%;
+  }
+
+  .modal-overlay {
+    padding: 15px;
+  }
+
   .auth-modal {
     width: 100%;
     max-width: 450px;
     height: auto;
-    min-height: 520px;
+    min-height: 480px;
     grid-template-columns: 1fr;
   }
-  .modal-left { display: none; }
-  .modal-right { padding: 50px 30px; }
+
+  .modal-left {
+    display: none;
+  }
+
+  .modal-right {
+    padding: 40px 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content .left h1 {
+    font-size: 2.8rem;
+  }
+
+  .techmind-title {
+    font-size: 1.2rem;
+  }
+
+  .btn-user {
+    padding: 0.4rem 0.6rem;
+    font-size: 1rem;
+  }
 }
