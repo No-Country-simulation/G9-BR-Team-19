@@ -129,6 +129,10 @@ body {
   border-radius: 2px;
 }
 
+.user-area {
+    position: relative;
+}
+
 .btn-user {
   display: flex;
   align-items: center;
@@ -141,6 +145,48 @@ body {
   font-size: 1.2rem;
   font-family: 'Iceland', sans-serif;
   cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 115%;
+  right: 0;
+  background: rgba(13, 8, 30, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  border-radius: 8px;
+  padding: 0.5rem;
+  min-width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-menu.hidden {
+  display: none !important;
+}
+
+.dropdown-item {
+  width: 100%;
+  height: 35px;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  background: linear-gradient(180deg, #4A1B90, #351165);
+  transition: .3s;
+  font-family: inherit;
+  font-size: 1.2rem;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dropdown-item:hover {
+  background: linear-gradient(180deg, #5E1DBA, #4A1B90);
 }
 
 /* ==========================================
@@ -310,7 +356,6 @@ body {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-/* Lado Frontal (Formulário) */
 .card-front {
   transform: rotateY(0deg);
   display: flex;
@@ -360,7 +405,6 @@ body {
   cursor: pointer;
 }
 
-/* Lado Traseiro (Resultados) */
 .card-back {
   transform: rotateY(180deg);
   display: flex;
@@ -782,5 +826,17 @@ body {
   .btn-user {
     padding: 0.4rem 0.6rem;
     font-size: 1rem;
+  }
+
+  .dropdown-menu {
+      min-width: 100%;
+      padding: 0.5rem;
+      top: 110%;
+  }
+
+  .dropdown-item {
+      font-size: 1rem;
+      height: 30px;
+      gap: 6px;
   }
 }
