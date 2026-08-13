@@ -63,7 +63,8 @@ body {
   font-size: 1.1rem;
 }
 
-.logo-img, .logo-icon {
+.logo-img, 
+.logo-icon {
   width: 35px;
   height: auto;
 }
@@ -79,12 +80,11 @@ body {
 .login-btn-landing {
   width: 90px;
   height: 32px;
-  border: none;
   color: white;
   border-radius: 6px;
   cursor: pointer;
   background: linear-gradient(180deg, #4A1B90, #351165);
-  transition: .3s;
+  transition: 0.3s;
   font-family: inherit;
   font-size: 1.2rem;
   border: 1px solid rgba(168, 85, 247, 0.4);
@@ -237,19 +237,19 @@ body {
   width: 230px;
   height: 75px;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   background: linear-gradient(180deg, #4A1B90, #351165);
   color: white;
   cursor: pointer;
   font-family: inherit;
   font-size: 1.7rem;
-  transition: .3s;
-  box-shadow: 0 0 20px rgba(118,56,255,.25);
+  transition: 0.3s;
+  box-shadow: 0 0 20px rgba(118, 56, 255, 0.25);
 }
 
 .start:hover {
   transform: translateY(-3px);
-  box-shadow: 0 0 30px rgba(132,74,255,.55);
+  box-shadow: 0 0 30px rgba(132, 74, 255, 0.55);
 }
 
 .hero-content .right {
@@ -261,19 +261,7 @@ body {
 .hero-content .right img {
   width: 220px;
   margin-top: 85px;
-  filter: drop-shadow(0 0 18px rgba(255,255,255,.15));
-}
-
-@media(max-width: 1100px) {
-  .landing-main {
-    flex-direction: column;
-    text-align: center;
-    gap: 50px;
-  }
-  .hero-content { flex-direction: column; }
-  .hero-content .left, .hero-content .right { width: 100%; }
-  .hero-content .left h1 { font-size: 70px; }
-  .start { margin-top: 60px; }
+  filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.15));
 }
 
 /* ==========================================
@@ -323,7 +311,7 @@ body {
 .flip-card-container {
   width: 100%;
   max-width: 780px;
-  height: 520px;
+  min-height: 520px;
   perspective: 1200px;
 }
 
@@ -354,6 +342,7 @@ body {
   border-radius: 16px;
   padding: 2.5rem;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  overflow-y: auto;
 }
 
 .card-front {
@@ -529,7 +518,6 @@ body {
   font-weight: 300;
 }
 
-
 /* ==========================================
    MODAIS DE AUTENTICAÇÃO
    ========================================== */
@@ -596,7 +584,7 @@ body {
   align-items: flex-start;
   padding: 50px 60px;
   background: #ffffff;
-  color: #333333; /* Corrigir visibilidade no lado claro */
+  color: #333333;
 }
 
 .close-modal {
@@ -838,5 +826,31 @@ body {
       font-size: 1rem;
       height: 30px;
       gap: 6px;
+  }
+}
+
+/* Mobile Small (até 480px) */
+@media (max-width: 480px) {
+  .hero-content .left h1 {
+    font-size: 2.8rem;
+  }
+
+  .hero-content .left p {
+    font-size: 1.1rem;
+  }
+
+  .start {
+    width: 100%;
+    max-width: 200px;
+    height: 60px;
+    font-size: 1.4rem;
+  }
+
+  .tags-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .placeholder-box h2 {
+    font-size: 2rem;
   }
 }

@@ -1,19 +1,25 @@
 # G9-BR-Team-19
 ## TechMind - Organização Inteligente de Conhecimento Técnico 🧠
 
----
+<hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![Flutter](https://img.shields.io/badge/Flutter-02569B?logo=flutter&logoColor=white)
+![Dart](https://img.shields.io/badge/Dart-0175C2?logo=dart&logoColor=white)
 ![Java](https://img.shields.io/badge/Java-25-ED8B00?logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-4.1.0-6DB33F?logo=springboot&logoColor=white)
 ![Maven](https://img.shields.io/badge/Maven-3.9+-C71A36?logo=apachemaven&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
+![Flyway](https://img.shields.io/badge/Flyway-Migrations-CC0200?logo=flyway&logoColor=white)
+![Swagger](https://img.shields.io/badge/Swagger-85EA2D?logo=swagger&logoColor=black)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.116+-009688?logo=fastapi&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Engine-2496ED?logo=docker&logoColor=white)
 ![Docker Compose](https://img.shields.io/badge/Docker_Compose-Enabled-2496ED?logo=docker&logoColor=white)
-![Google Colab](https://img.shields.io/badge/Google_Colab-Notebook-F9AB00?logo=googlecolab&logoColor=white)
-![Flyway](https://img.shields.io/badge/Flyway-Migrations-CC0200?logo=flyway&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
-![Machine Learning](https://img.shields.io/badge/Machine-Learning-purple)
+![Render](https://img.shields.io/badge/Render-46E3B7?logo=render&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white)
 
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
@@ -21,23 +27,25 @@
 ## 📋 Sobre o Projeto
 
 ---
-O **TechMind API** é uma solução de backend desenvolvida para a orquestração e gerenciamento inteligente de conteúdos técnicos. A aplicação atua como uma ponte eficiente entre as requisições enviadas pelo usuário e um modelo preditivo de Inteligência Artificial baseado em Python, garantindo a validação dos dados de entrada, a classificação automatizada e a organização estruturada dessas informações.
+O **TechMind** é uma solução completa (Frontend Web, Aplicativo Mobile, Backend REST e Machine Learning) desenvolvida para a orquestração e gerenciamento inteligente de conteúdos técnicos. A aplicação transforma textos em um acervo categorizado, resumido e tagueado por Inteligência Artificial, permitindo a fácil consulta, classificação e reutilização do conhecimento.
+
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
 ### 🎯 Objetivos
 
 ---
-O backend atua como uma camada intermediária entre o cliente e a API de Machine Learning.
+
+A aplicação integra interfaces de usuário (Web SPA e Mobile Flutter), uma camada intermediária REST em Spring Boot e uma API de Machine Learning em Python.
 
 Seu papel é:
 
-- Receber um conteúdo técnico (título e texto);
-- Validar os dados enviados;
-- Enviar a requisição para a API de classificação desenvolvida em FastAPI;
-- Receber a resposta do modelo de IA;
-- Armazenar temporariamente o resultado;
-- Disponibilizar consultas através de endpoints REST.
-
+- Oferecer interfaces web e mobile responsivas para envio e visualização de análises;
+- Permitir a navegação entre a Landing Page inicial, o ecossistema web e o aplicativo Flutter;
+- Receber conteúdos técnicos (título e texto) enviados pelos clientes;
+- Validar os dados e encaminhá-los para a API de IA desenvolvida em FastAPI;
+- Receber a resposta do modelo (Categoria, Tags, Resumo e Probabilidade);
+- Persistir as análises em banco de dados relacional (MySQL/PostgreSQL);
+- Exibir os resultados dinamicamente no acervo (Bibliotech).
 
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
@@ -46,28 +54,33 @@ Seu papel é:
 ---
 
 ```text
-┌─────────────┐
-│   Cliente   │  (Postman/cURL/Frontend)
-└──────┬──────┘
-       │ POST /api/conteudos/processar
-       ▼
-┌─────────────────────┐  
-│   Java API :8080    │  ✅ Recebe requisições REST
-│   Spring Boot 4.1.0 │  ✅ Valida dados (Jakarta / Bean Validation)
-│                     │  ✅ Trata exceções globalmente
-└──────┬──────────────┘  ✅ Gerenciamento da API
-       │
-       ▼
-┌─────────────────────┐  ✅ Alternância de Ambiente (Modo Mock ativo)
-│   API de ML         │  ✅ Extração de palavras-chave
-│   FastAPI (Python)  │  ✅ Geração de resumo 
-└──────┬──────────────┘  ✅ Cálculo da probabilidade
-       │
-       ▼
-┌─────────────────────┐
-│   Modelo de IA      │  ✅ Vetorização TF-IDF
-│   Mock/Real Service │  ✅ Classificação e Sumarização de Conteúdo
-└─────────────────────┘  ✅ Retorna Categoria, Tags e Probabilidade
+
+┌─────────────────────┐    ┌─────────────────────┐
+│    Frontend Web     │    │   App Mobile        │  ✅ Interface SPA Web (HTML5, CSS3 3D, Vanilla JS)
+│   (SPA Vanilla JS)  │    │   (Flutter / Dart)  │  ✅ App Mobile Multiplataforma (Android & iOS)
+└──────────┬──────────┘    └──────────┬──────────┘  ✅ Consumo Assíncrono de API via HTTP/Fetch
+           │                          │
+           └────────────┬─────────────┘
+                        │ POST /api/conteudos/processar
+                        ▼
+          ┌───────────────────────────┐
+          │   Java API (Spring Boot)  │  ✅ Recebe e valida requisições REST (Jakarta Validation)
+          │   Serviço REST / Render   │  ✅ Documentação interativa integrada (Swagger/OpenAPI 3)
+          └──────┬─────────────┬──────┘  ✅ Migrações de banco via Flyway e tratamento global de erros
+                 │             │
+        SQL CRUD │             │ HTTP Request (REST Client)
+                 ▼             ▼
+┌─────────────────────┐   ┌─────────────────────┐
+│  Banco Relacional   │   │   API de ML         │  ✅ Alternância de ambiente (Modo Mock / Produção)
+│ (MySQL/PostgreSQL)  │   │   FastAPI (Python)  │  ✅ Extração de palavras-chave, resumo e probabilidade
+└─────────────────────┘   └──────────┬──────────┘  ✅ Hospedada em nuvem (Render/OCI)
+                                     │
+                                     ▼
+                          ┌─────────────────────┐
+                          │    Modelo de IA     │  ✅ Vetorização TF-IDF
+                          │  (Classificador)    │  ✅ Classificação e Sumarização de Conteúdo
+                          └─────────────────────┘  ✅ Retorna Categoria, Tags e Probabilidade
+
 ```
 
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
@@ -76,12 +89,22 @@ Seu papel é:
 ## 🛠️ Tecnologias
 
 ---
+### Frontend (Web) & Mobile
+*   🌐 **HTML5** (Semântico e estruturado)
+*   🎨 **CSS3** (Variáveis, Flexbox, Grid, Animações 3D preserve-3d, Responsividade)
+*   ⚡ **JavaScript Vanilla** (ES6+) (Manipulação de DOM, Fetch API, SPA Routing)
+*   📱  **Flutter & Dart** (Aplicativo Mobile Multiplataforma Android/iOS)
+*   🔤 **Google Fonts** (Fonte Iceland) & Font Awesome (Ícones)
 
 ### Backend (Java)
 *   ☕ **Java 25**
 *   🍃 **Spring Boot 4.1.0**
 *   🔧 **Maven** (Compilação)
-*   🔒 **RestClient + Validação (Jakarta)**
+*   🔒 **RestClient + Validação** (Jakarta)
+*   🗄️ **Spring Data JPA & Hibernate**
+*   🐬 **MySQL / PostgreSQL** (Banco de Dados Relacional)
+    🦅 **Flyway** (Gerenciamento de Migrações do Banco)
+*   📖 **Swagger UI / OpenAPI 3** (Documentação da API)
 *   📊 **Java Stream API** (Filtros em memória)
 *   🧰 **Lombok**
 
@@ -94,6 +117,7 @@ Seu papel é:
 
 ### DevOps & Qualidade
 *   🐳 **Docker + Docker Compose**
+*   ☁️ **Render / OCI** (Hospedagem e Deploy Cloud)
 *   ✅ **JUnit 5 + Pytest**
 *   🌱 **Git**
 *   📊 **Relatórios de Cobertura**
@@ -104,35 +128,56 @@ Seu papel é:
 
 ---
 
-```
-backend/
+```text
+techmind/
 │
-├── src/
-│   ├── main/
-│   │
-│   ├── java/com/techmind/team19/
-│   │   ├── controller/
-│   │   │      ApiController.java
-│   │   │
-│   │   ├── dto/
-│   │   │      DadosConsultaConteudos.java
-│   │   │      DadosRespostaConteudo.java
-│   │   │
-│   │   ├── exception/
-│   │   │      GlobalException.java
-│   │   │
-│   │   ├── service/
-│   │   │      ConteudoStorageService.java
-│   │   │      ServiceDados.java
-│   │   │
-│   │   └── Team19Application.java
-│   │
-│   └── resources/
-│          application.properties
+├── mobile/
+│   ├── lib/
+│   │   ├── main.dart
+│   │   ├── models/
+│   │   ├── screens/
+│   │   └── services/
+│   └──  pubspec.yaml
+│   
 │
-├── Dockerfile
-├── docker-compose.yml
-├── pom.xml
+├── frontend/
+│   ├── assets/
+│   │      ai.png
+│   │      background.png
+│   │      brain.png
+│   │      knowledge.png
+│   ├── index.html
+│   ├── style.css
+│   └── app.js
+│
+├── backend/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/com/techmind/team19/
+│   │   │   │   ├── config/
+│   │   │   │   │      SwaggerConfig.java
+│   │   │   │   ├── controller/
+│   │   │   │   │      ApiController.java
+│   │   │   │   ├── dto/
+│   │   │   │   │      DadosConsultaConteudos.java
+│   │   │   │   │      DadosRespostaConteudo.java
+│   │   │   │   ├── exception/
+│   │   │   │   │      GlobalException.java
+│   │   │   │   ├── model/
+│   │   │   │   │      Conteudo.java
+│   │   │   │   ├── repository/
+│   │   │   │   │      ConteudoRepository.java
+│   │   │   │   ├── service/
+│   │   │   │   │      ConteudoService.java
+│   │   │   │   │      ServiceDados.java
+│   │   │   │   └── Team19Application.java
+│   │   │   └── resources/
+│   │   │          application.properties
+│   │   │          db/migration/
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+│   └── pom.xml
+│
 └── README.md
 ```
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
@@ -147,9 +192,10 @@ O backend comunica-se com a API desenvolvida pela equipe de Data Science para re
 
 https://techmind-api.onrender.com
 
-### 📖 Swagger
 
-https://techmind-api.onrender.com/docs
+### 📖 Documentação Interativa
+* **Backend Java (Spring Boot):** [Swagger UI](https://techmind-api.onrender.com/swagger-ui.html)
+* **API de IA (FastAPI / Python):** [FastAPI Docs](https://techmind-api.onrender.com/docs)
 
 
 ### 📦 A resposta da API contém
@@ -173,6 +219,11 @@ spring.application.name=team19
 model.python.url=https://techmind-api.onrender.com/conteudo
 model.python.mock-enabled=true
 ```
+No Frontend (app.js), a URL do backend pode ser configurada na constante global:
+
+```JavaScript
+const API_BASE_URL = 'http://localhost:8080';
+```
 
 ### 🔹 Propriedades
 
@@ -185,8 +236,9 @@ model.python.mock-enabled=true
 
 ### 📋 Pré-requisitos
 
-- Java 21
+- Java 25
 - Maven 3.9+
+- Navegador Web moderno (Chrome, Firefox, Edge, Safari)
 - Git
 
 ### 📥 Clone o projeto
@@ -202,6 +254,8 @@ cd backend
 
 ### ▶️ Execute
 
+### 1. O Backend
+
 ```bash
 ./mvnw spring-boot:run
 ```
@@ -211,25 +265,32 @@ ou
 ```bash
 mvn spring-boot:run
 ```
-
-### A aplicação ficará disponível em:
+### O backend estará disponível em:
 
 ```
 http://localhost:8080
 ```
+### 2. O Frontend
+
+Basta abrir o arquivo frontend/index.html em qualquer navegador web ou utilizar uma extensão como o Live Server no VS Code.
+
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
 ## 🧩 Implementação de Padrões de Projeto & Componentes
 
 ---
 
-A aplicação foi desenhada seguindo as melhores práticas de desenvolvimento corporativo em Java, garantindo baixo acoplamento, alta coesão e facilidade de manutenção.
+A aplicação foi desenhada seguindo as melhores práticas de desenvolvimento corporativo em Java e de interface Web, garantindo baixo acoplamento, alta coesão e facilidade de manutenção.
 
 | Padrão / Componente | Implementação | Propósito |
 | :--- | :--- | :--- |
+| **Arquitetura SPA** | `view-landing`e `view-app em HTML/JS` | Transição sem recarregamento de página entre a Landing Page e o ecossistema do app.|
+| **Efeito Flip Card 3D** | `#main-flip-card` com CSS `transform-style: preserve-3d` | Separação elegante entre a entrada de dados (Front face) e a exibição dos resultados da IA (Back face).|
+| **Navegação por Abas** | `.nav-tabs e .tab-content` | Alternância dinâmica entre "Nova Análise", "Bibliotech" e "Métricas".|
+| **Modais de Autenticação** | `#modal-login` e `#modal-register` | Interface de login e cadastro integrada com efeito visual escurecido (overlay).|
 | **Padrão DTO** | `DadosConsultaConteudos`, `DadosRespostaConteudo` | Desacoplamento e segurança na trafegabilidade de dados entre a API Java, o cliente e os serviços externos. |
 | **Camada de Serviço** | `ServiceDados` | Centraliza as regras de negócio do sistema, a orquestração de dados e a comunicação via HTTP Client. |
-| **Camada de Armazenamento** | `ConteudoStorageService` | Centraliza o gerenciamento, persistência em memória e aplicação de filtros dinâmicos com a Stream API. |
+| **Camada de Persistência** | `ConteudoRepository` | Interface Spring Data JPA para comunicação e operações CRUD com o Banco de Dados. |
 | **Tratamento Global** | `GlobalException` com `@RestControllerAdvice` | Intercepta exceções em tempo de execução, garantindo respostas padronizadas e códigos de status HTTP sem expor o stacktrace. |
 
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
@@ -365,13 +426,27 @@ A aplicação utiliza `@RestControllerAdvice` para centralizar o tratamento das 
 ```
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
-## 💾 Armazenamento
+## 💾 Armazenamento e Persistência
 
 ---
 
-Atualmente os conteúdos classificados são armazenados apenas em memória utilizando uma lista (`ArrayList`).
+A aplicação utiliza um **Banco de Dados Relacional (MySQL / PostgreSQL)** para a persistência definitiva de todos os conteúdos processados e categorizados pela inteligência artificial.
 
-⚠️Não há persistência em banco de dados nesta versão.
+- **Mapeamento:** Jakarta Persistence (JPA / Hibernate)
+- **Migrations:** Gerenciamento e versionamento do esquema de banco de dados via **Flyway** db/migration
+- **Repositório:** `ConteudoRepository` executando consultas otimizadas no banco de dados.
+
+<hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
+
+## 📱 Aplicativo Mobile (Flutter)
+
+---
+
+A solução conta com uma versão mobile desenvolvida em **Flutter (Dart)**, garantindo uma experiência nativa para Android e iOS.
+
+- **Interface Responsiva:** Consulta do acervo, filtro por tags e envio de análises em dispositivos móveis
+- **Consumo de API:** Comunicação direta com o backend em nuvem via requisições HTTP assíncronas
+- **Gerenciamento de Estado:** Arquitetura desacoplada para renderização ágil das telas
 
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
@@ -403,14 +478,9 @@ docker compose up
 
 ---
 
-- Integração com banco de dados
-- Autenticação com JWT
-- Cache de respostas
-- Documentação com Swagger/OpenAPI
-- Testes unitários
-- Testes de integração
-- Deploy em ambiente de produção
-- Persistência dos conteúdos processados
+- Autenticação de usuários com Spring Security + JWT nos modais de Login/Cadastro
+- Implementação de gráficos estatísticos na aba Métricas
+- Cache de respostas para otimizar consultas da IA
 
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
@@ -418,22 +488,19 @@ docker compose up
 
 ---
 
-### 💻 Backend
+### 🎨 Frontend & Mobile
+- Desenvolvimento da Single Page Application (SPA Web) em Vanilla JS e CSS3 3D;
+- Criação do aplicativo mobile multiplataforma em Flutter/Dart;
+- Consumo assíncrono das APIs REST e gerenciamento visual da interface.
 
-- Desenvolvimento da API REST em Spring Boot
-- Integração com a API de Machine Learning
-- Validação dos dados
-- Tratamento global de exceções
-- Gerenciamento das requisições
+### 💻 Backend & DevOps
+- Desenvolvimento da API RESTful em Spring Boot (Java 25);
+- Modelagem e integração com Banco de Dados Relacional (JPA + Flyway);
+- Mapeamento Swagger/OpenAPI e Deploy da infraestrutura na nuvem (Render/OCI).
 
 ### 🤖 Data Science
-
-- Desenvolvimento do modelo de Machine Learning
-- Processamento de Linguagem Natural (NLP)
-- Classificação dos conteúdos
-- Extração de palavras-chave
-- Geração de resumos
-- Disponibilização da API FastAPI
+- Desenvolvimento e treinamento do modelo de Machine Learning em Python;
+- Implementação da API FastAPI para extração de tags, resumos e categorização NLP.
 
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
@@ -441,14 +508,13 @@ docker compose up
 
 ---
 
-O projeto encontra-se em desenvolvimento e atualmente possui:
-
-- ✅ API REST funcional
-- ✅ Integração com a API FastAPI
-- ✅ Modo Mock para desenvolvimento
-- ✅ Validação dos dados de entrada
-- ✅ Tratamento global de exceções
-- ✅ Armazenamento temporário em memória
+- ✅ Single Page Application (SPA Web) funcional com animação Flip Card 3D
+- ✅ Aplicativo Mobile em Flutter funcional
+- ✅ API REST em Spring Boot com validações e tratamento global de exceções
+- ✅ Persistência definitiva em Banco de Dados Relacional via Spring Data JPA + Flyway
+- ✅ Integração com a API de Machine Learning (FastAPI) em Nuvem e Modo Mock
+- ✅ Documentação interativa configurada com Swagger UI e FastAPI Docs
+- ✅ Deploy realizado em ambiente Cloud (Render)
 
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
