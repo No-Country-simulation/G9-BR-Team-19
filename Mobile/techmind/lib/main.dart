@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:techmind/view/landpage.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:techmind/view/landpage_page.dart';
+import 'package:techmind/viewmodels/consulta_conteudo_viewmodels.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ConsultaConteudoViewmodels(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,7 +21,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Tech Mind',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        // colorScheme: ColorScheme.fromSeed(seedColor: Color(0xff000EA7)),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xff000EA7)),
+        textTheme: GoogleFonts.icebergTextTheme(),
       ),
       home: const Landpage(),
     );
