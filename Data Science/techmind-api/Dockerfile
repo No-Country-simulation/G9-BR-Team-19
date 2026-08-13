@@ -5,6 +5,7 @@ WORKDIR /app
 
 # Instala dependências primeiro (aproveita cache do Docker entre builds)
 COPY requirements.txt .
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copia o código da API e os artefatos treinados
