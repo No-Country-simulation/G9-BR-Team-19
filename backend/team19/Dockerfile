@@ -4,7 +4,7 @@ WORKDIR /app
 
 # copia dependências
 COPY pom.xml .
-RUN mvn dependency:go-offline -B
+# RUN mvn dependency:go-offline -B
 
 # copia o código e faz a build do package
 COPY src ./src
