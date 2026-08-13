@@ -57,13 +57,19 @@
 
       <div class="user-area">
         <button id="btn-user-menu" class="btn-user">
-          Usuário
+            <span id="user-name-display">Usuário</span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
             <circle cx="12" cy="7" r="4"></circle>
           </svg>
         </button>
-      </div>
+
+        <div id="user-dropdown" class="dropdown-menu hidden">
+            <button id="btn-logout" class="dropdown-item">
+              <i class="fa-solid fa-right-from-bracket"></i> Sair
+            </button>
+          </div>
+        </div>
     </header>
 
     <main class="app-main">
@@ -161,18 +167,18 @@
         <h1>Entrar</h1>
         <span>
           Ainda não possui uma conta?
-          <a href="#" id="link-to-register">Cadastrar</a>
+          <a href="#" id="link-to-signup">Cadastrar</a>
         </span>
 
         <form id="form-login">
           <div class="input-group">
             <i class="fa-solid fa-user"></i>
-            <input type="text" placeholder="Nome de usuário ou email" required autocomplete="username">
+            <input type="text" id="login-email" placeholder="Email" required autocomplete="username">
           </div>
 
           <div class="input-group">
             <i class="fa-solid fa-lock"></i>
-            <input type="password" placeholder="Senha" required autocomplete="current-password">
+            <input type="password" id="login-password" placeholder="Senha" required autocomplete="current-password">
           </div>
 
           <button class="submit-btn" type="submit">Login</button>
@@ -181,7 +187,7 @@
     </div>
   </div>
 
-  <div id="modal-register" class="modal-overlay hidden">
+  <div id="modal-signup" class="modal-overlay hidden">
     <div class="auth-modal">
       <div class="modal-left">
         <h2>Seja bem-vindo(a)</h2>
@@ -197,20 +203,20 @@
           <a href="#" id="link-to-login">Entrar</a>
         </span>
 
-        <form id="form-register">
+        <form id="form-signup">
           <div class="input-group">
             <i class="fa-solid fa-user"></i>
-            <input type="text" placeholder="Nome de usuário" required>
+            <input type="text" id="signup-name" placeholder="Nome de usuário" required>
           </div>
 
           <div class="input-group">
             <i class="fa-solid fa-envelope"></i>
-            <input type="email" placeholder="Email" required>
+            <input type="email" id="signup-email" placeholder="Email" required>
           </div>
 
           <div class="input-group">
             <i class="fa-solid fa-lock"></i>
-            <input type="password" placeholder="Senha" required>
+            <input type="password" id="signup-password" placeholder="Senha" required>
           </div>
 
           <button class="submit-btn" type="submit">Cadastrar</button>

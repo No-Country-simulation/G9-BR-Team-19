@@ -1,23 +1,28 @@
-// URL do backend, ajustar conforme o ambiente (local, docker-compose, OCI)
 const API_BASE_URL = 'http://localhost:8080';
 const PROCESSAR_ENDPOINT = `${API_BASE_URL}/api/conteudos/processar`;
+const LOGIN_ENDPOINT = `${API_BASE_URL}/entrar`;
+const SIGNUP_ENDPOINT = `${API_BASE_URL}/cadastrar`;
 
 document.addEventListener('DOMContentLoaded', () => {
 
   const viewLanding = document.getElementById('view-landing');
   const viewApp = document.getElementById('view-app');
 
+  const btnUserMenu = document.getElementById('btn-user-menu');
+  const userDropdown = document.getElementById('user-dropdown');
+  const btnLogout = document.getElementById('btn-logout');
+  const userNameDisplay = document.getElementById('user-name-display');
   const modalLogin = document.getElementById('modal-login');
-  const modalRegister = document.getElementById('modal-register');
+  const modalSignup = document.getElementById('modal-signup');
   const formLogin = document.getElementById('form-login');
-  const formRegister = document.getElementById('form-register');
+  const formSignup = document.getElementById('form-signup');
 
   const btnStart = document.querySelector('.start');
   const btnLoginLanding = document.querySelector('.login-btn-landing');
 
   const closeLoginBtn = modalLogin.querySelector('.close-modal');
-  const closeRegisterBtn = modalRegister.querySelector('.close-modal');
-  const linkToRegister = document.getElementById('link-to-register');
+  const closeSignupBtn = modalSignup.querySelector('.close-modal');
+  const linkToSignup = document.getElementById('link-to-signup');
   const linkToLogin = document.getElementById('link-to-login');
 
   const tabBtns = document.querySelectorAll('.tab-btn');
@@ -36,6 +41,72 @@ document.addEventListener('DOMContentLoaded', () => {
   const resTags = document.getElementById('res-tags');
   const resResumo = document.getElementById('res-resumo');
 
+  function checkExistingSession() {
+      const storedName = localStorage.getItem('techmind_user_name');
+      const storedToken = localStorage.getItem('techmind_token');
+
+      if (storedName && storedToken) {
+        userNameDisplay.textContent = storedName;
+      }
+    }
+
+    checkExistingSession();
+
+    formLogin.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value.trim();
+
+      try {
+        const response = await fetch(LOGIN_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        if (!response.ok) {
+          throw new Error('Credenciais inválidas ou erro no servidor.');
+        }
+
+        const data = await response.json();
+
+        localStorage.setItem('techmind_token', data.token);
+        localStorage.setItem('techmind_user_name', data.name);
+
+        userNameDisplay.textContent = data.name;
+
+        modalLogin.classList.add('hidden');
+        formLogin.reset();
+        showApp();
+      } catch (err) {
+        console.error('Falha no login:', err);
+        alert(err.message);
+      }
+    });
+
+      btnUserMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+        userDropdown.classList.toggle('hidden');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!userDropdown.contains(e.target) && !btnUserMenu.contains(e.target)) {
+          userDropdown.classList.add('hidden');
+        }
+      });
+
+      btnLogout.addEventListener('click', () => {
+        localStorage.removeItem('techmind_token');
+        localStorage.removeItem('techmind_user_name');
+
+        userNameDisplay.textContent = 'Usuário';
+        userDropdown.classList.add('hidden');
+
+        viewApp.classList.add('hidden');
+        viewLanding.classList.remove('hidden');
+      });
+
   function showApp() {
     viewLanding.classList.add('hidden');
     viewApp.classList.remove('hidden');
@@ -43,24 +114,30 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function switchTab(targetId) {
-    tabBtns.forEach(btn => {
-      if (btn.dataset.target === targetId) btn.classList.add('active');
-      else btn.classList.remove('active');
-    });
+      tabBtns.forEach(btn => {
+        if (btn.dataset.target === targetId) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
 
-    tabContents.forEach(content => {
-      if (content.id === targetId) {
-        content.classList.remove('hidden');
-        content.classList.add('active');
-      } else {
-        content.classList.add('hidden');
-        content.classList.remove('active');
-      }
-    });
-  }
+      tabContents.forEach(content => {
+        if (content.id === targetId) {
+          content.classList.remove('hidden');
+          content.classList.add('active');
+        } else {
+          content.classList.add('hidden');
+          content.classList.remove('active');
+        }
+      });
+    }
 
   btnStart.addEventListener('click', () => {
-    showApp();
+    const storedToken = localStorage.getItem('techmind_token');
+
+    if (storedToken) {
+      showApp();
+    } else {
+      modalLogin.classList.remove('hidden');
+    }
   });
 
   btnLoginLanding.addEventListener('click', () => {
@@ -71,33 +148,80 @@ document.addEventListener('DOMContentLoaded', () => {
     modalLogin.classList.add('hidden');
   });
 
-  closeRegisterBtn.addEventListener('click', () => {
-    modalRegister.classList.add('hidden');
+  closeSignupBtn.addEventListener('click', () => {
+    modalSignup.classList.add('hidden');
     modalLogin.classList.remove('hidden');
   });
 
-  linkToRegister.addEventListener('click', (e) => {
+  linkToSignup.addEventListener('click', (e) => {
     e.preventDefault();
     modalLogin.classList.add('hidden');
-    modalRegister.classList.remove('hidden');
+    modalSignup.classList.remove('hidden');
   });
 
   linkToLogin.addEventListener('click', (e) => {
     e.preventDefault();
-    modalRegister.classList.add('hidden');
+    modalSignup.classList.add('hidden');
     modalLogin.classList.remove('hidden');
   });
 
-  formLogin.addEventListener('submit', (e) => {
+  formLogin.addEventListener('submit', async (e) => {
     e.preventDefault();
-    modalLogin.classList.add('hidden');
-    showApp();
+
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value.trim();
+
+    try {
+      const response = await fetch(LOGIN_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      if (!response.ok) {
+        throw new Error('Credenciais inválidas ou erro no servidor.');
+      }
+
+      const data = await response.json();
+
+      localStorage.setItem('techmind_token', data.token);
+
+      modalLogin.classList.add('hidden');
+      formLogin.reset();
+      showApp();
+    } catch (err) {
+      console.error('Falha no login:', err);
+      alert(err.message);
+    }
   });
 
-  formRegister.addEventListener('submit', (e) => {
+  formSignup.addEventListener('submit', async (e) => {
     e.preventDefault();
-    modalRegister.classList.add('hidden');
-    showApp();
+
+    const name = document.getElementById('signup-name').value.trim();
+    const email = document.getElementById('signup-email').value.trim();
+    const password = document.getElementById('signup-password').value.trim();
+
+    try {
+      const response = await fetch(SIGNUP_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password })
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao cadastrar. O email já pode estar em uso.');
+      }
+
+      alert('Cadastro realizado com sucesso! Faça login para continuar.');
+
+      modalSignup.classList.add('hidden');
+      modalLogin.classList.remove('hidden');
+      formSignup.reset();
+    } catch (err) {
+      console.error('Falha no cadastro:', err);
+      alert(err.message);
+    }
   });
 
   tabBtns.forEach(btn => {
@@ -137,18 +261,31 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function processarConteudo(titulo, texto) {
-    const response = await fetch(PROCESSAR_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ titulo, texto })
-    });
+      const token = localStorage.getItem('techmind_token');
 
-    if (!response.ok) {
-      throw new Error(await extrairMensagemErro(response));
+      if (!token) {
+        throw new Error('Usuário não autenticado. Por favor, faça login novamente.');
+      }
+
+      const response = await fetch(PROCESSAR_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ titulo, texto })
+      });
+
+      if (!response.ok) {
+        if (response.status === 403 || response.status === 401) {
+            localStorage.removeItem('techmind_token');
+            throw new Error('Sessão expirada ou inválida. Faça login novamente.');
+        }
+        throw new Error(await extrairMensagemErro(response));
+      }
+
+      return response.json();
     }
-
-    return response.json();
-  }
 
   formAnalise.addEventListener('submit', async (e) => {
     e.preventDefault();

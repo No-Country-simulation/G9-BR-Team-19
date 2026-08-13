@@ -1,6 +1,7 @@
 package com.techmind.team19.domain.queryResult;
 
 import com.techmind.team19.domain.tag.Tag;
+import com.techmind.team19.domain.user.User;
 import com.techmind.team19.dto.DadosRespostaConteudo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -33,6 +34,10 @@ public class QueryResult {
 
     private String summary;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     @ManyToMany
     @JoinTable(
             name = "query_result_tags",
@@ -49,10 +54,11 @@ public class QueryResult {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public QueryResult(DadosRespostaConteudo resposta, Set<Tag> tags) {
+    public QueryResult(DadosRespostaConteudo resposta, Set<Tag> tags, User user) {
         this.category = resposta.category();
         this.probability = resposta.probability();
         this.summary = resposta.summary();
         this.tags = tags;
+        this.user = user;
     }
 }
