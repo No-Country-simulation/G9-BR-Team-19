@@ -309,10 +309,11 @@ body {
 
 /* FLIP CARD */
 .flip-card-container {
-  width: 950px;
-  height: 500px;
-  max-width: calc(100vw - 2rem);
+  width: 100%;
+  max-width: 780px;
+  height: 520px;
   perspective: 1200px;
+  margin: 0 auto;
 }
 
 .flip-card-inner {
@@ -438,6 +439,14 @@ body {
   gap: 0.3rem;
 }
 
+.resultado-top-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+  text-align: center;
+}
+
 .field-label {
   font-size: 1.1rem;
 }
@@ -448,7 +457,7 @@ body {
   border-radius: 8px;
   padding: 0.5rem 0.8rem;
   color: #e2e8f0;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .resumo-box {
@@ -466,7 +475,7 @@ body {
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.03);
-  font-size: 0.95rem;
+  font-size: 1rem;
   padding: 0.3rem;
   text-align: center;
 }

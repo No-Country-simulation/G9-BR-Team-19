@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputConteudo = document.getElementById('conteudo');
 
   const resCategoria = document.getElementById('res-categoria');
+  const resProbabilidade = document.getElementById('res-probabilidade');
   const resTags = document.getElementById('res-tags');
   const resResumo = document.getElementById('res-resumo');
 
@@ -305,6 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const resultado = await processarConteudo(titulo, texto);
 
       resCategoria.textContent = resultado.categoria || '\u2014';
+      resProbabilidade.textContent = resultado.probabilidade ? `${resultado.probabilidade}%` : '\u2014';
       preencherTags(resultado.tags);
       resResumo.textContent = resultado.resumo || '\u2014';
 
