@@ -135,10 +135,70 @@
       </div>
 
       <div id="tab-bibliotech" class="tab-content hidden">
-        <div class="placeholder-box">
-          <h2>Em Breve</h2>
+        <div class="bibliotech-container">
+
+          <header class="bibliotech-header">
+            <h2 class="bibliotech-title">Sua Bibliotech de Conhecimento</h2>
+            <p class="bibliotech-subtitle">Gerencie e consulte seu acervo de textos analisados</p>
+          </header>
+
+          <div class="bibliotech-controls">
+            <div class="search-box">
+              <input type="text" id="input-busca" placeholder="Busca por título, categoria ou palavra-chave">
+              <span class="search-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </span>
+          </div>
+
+          <button type="button" class="btn-list-view" title="Alternar visualização">
+            <i class="fa-solid fa-list-ul"></i>
+          </button>
+
+          <div class="dropdown-filter">
+            <button type="button" class="btn-dropdown" id="btn-categorias">
+              <span>Categorias</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="dropdown-menu hidden" id="dropdown-categorias">
+              <a href="#" class="dropdown-item">Backend</a>
+              <a href="#" class="dropdown-item">Frontend</a>
+              <a href="#" class="dropdown-item">Mobile</a>
+              <a href="#" class="dropdown-item">AI/Ml</a>
+            </div>
+          </div>
         </div>
+
+        <div class="cards-grid" id="bibliotech-grid">
+
+          <div class="tech-card">
+            <div class="card-top">
+              <span class="card-badge">Backend</span>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">DESIGN PATTERNS</h3>
+              <P class="card-description">Texto sobre design patterns com muita informação</P>
+            </div>
+
+            <div class="card-footer">
+              <button type="button" class="btn-visualizar">Visualizar</button>
+              <button type="button" class="btn-delete" title="excluir" aria-label="Excluir">
+              <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="tech-card empty-card"></div>
+          <div class="tech-card empty-card"></div>
+          <div class="tech-card empty-card"></div>
+          <div class="tech-card empty-card"></div>
+          <div class="tech-card empty-card"></div>
+
+        </div>
+
       </div>
+    </div>
 
       <div id="tab-metricas" class="tab-content hidden">
         <div class="placeholder-box">
