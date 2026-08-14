@@ -189,4 +189,91 @@ document.addEventListener('DOMContentLoaded', () => {
   btnVerBibliotech.addEventListener('click', () => {
     switchTab('tab-bibliotech');
   });
+
+  /* ==========================================
+     LÓGICA DA INTERFACE BIBLIOTECH
+     ========================================== */
+
+  // Elementos da Bibliotech
+  const inputBusca = document.getElementById('input-busca');
+  const btnDropdown = document.querySelector('.btn-dropdown');
+  const dropdownMenu = document.querySelector('.dropdown-menu');
+  const dropdownItems = document.querySelectorAll('.dropdown-item');
+  const cardsGrid = document.querySelector('.cards-grid');
+
+  // 1. Abrir/Fechar Dropdown de Categorias
+  if (btnDropdown && dropdownMenu) {
+    btnDropdown.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdownMenu.classList.toggle('hidden');
+    });
+  }
+
+  // 2. Filtrar por Categoria no Dropdown
+  dropdownItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      dropdownItems.forEach(i => i.classList.remove('active', 'selected'));
+      item.classList.add('selected');
+
+      const categoriaSelecionada = item.textContent.trim().toLowerCase();
+      filtrarCards(inputBusca?.value.trim().toLowerCase() || '', categoriaSelecionada);
+
+      dropdownMenu.classList.add('hidden');
+    });
+  });
+
+  // 3. Busca por Texto em Tempo Real
+  if (inputBusca) {
+    inputBusca.addEventListener('input', (e) => {
+      const termo = e.target.value.trim().toLowerCase();
+      const itemAtivo = document.querySelector('.dropdown-item.selected');
+      const categoriaAtiva = itemAtivo ? itemAtivo.textContent.trim().toLowerCase() : 'todas';
+
+      filtrarCards(termo, categoriaAtiva);
+    });
+  }
+
+  // Função Auxiliar para Filtrar Cards
+  function filtrarCards(termoTexto, categoria) {
+    const cards = document.querySelectorAll('.tech-card:not(.empty-card)');
+
+    cards.forEach(card => {
+      const titulo = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
+      const descricao = card.querySelector('.card-description')?.textContent.toLowerCase() || '';
+      const badge = card.querySelector('.card-badge')?.textContent.toLowerCase() || '';
+
+      const bateTexto = !termoTexto || titulo.includes(termoTexto) || descricao.includes(termoTexto) || badge.includes(termoTexto);
+      const bateCategoria = !categoria || categoria === 'todas' || badge === categoria;
+
+      card.style.display = (bateTexto && bateCategoria) ? 'flex' : 'none';
+    });
+  }
+
+  // 4. Ações dos Cards (Visualizar e Excluir)
+  if (cardsGrid) {
+    cardsGrid.addEventListener('click', (e) => {
+      const btnDelete = e.target.closest('.btn-delete');
+      const btnVisualizar = e.target.closest('.btn-visualizar');
+      const card = e.target.closest('.tech-card');
+
+      if (btnDelete && card) {
+        if (confirm('Deseja realmente remover este item da sua Bibliotech?')) {
+          card.remove();
+        }
+      } else if (btnVisualizar && card) {
+        const titulo = card.querySelector('.card-title')?.textContent;
+        alert(`Visualizando detalhes de: ${titulo}`);
+      }
+    });
+  }
+
+  // Fechar Dropdown ao Clicar Fora
+  document.addEventListener('click', (e) => {
+    if (dropdownMenu && !dropdownMenu.contains(e.target) && !btnDropdown?.contains(e.target)) {
+      dropdownMenu.classList.add('hidden');
+    }
+  });
+
+
 });
