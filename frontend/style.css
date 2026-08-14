@@ -1125,3 +1125,27 @@ body {
     font-size: 1rem;
   }
 }
+
+/* ==========================================
+   TOPO DO CARD (tag / badge de categoria)
+   ========================================== */
+@media (max-width: 700px) {
+  .bibliotech-title {
+    font-size: 38px;
+    padding: 0 10px;
+  }
+
+  .bibliotech-subtitle {
+    font-size: 18px;
+  }
+
+  .bibliotech-controls {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 0 10px;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+}
