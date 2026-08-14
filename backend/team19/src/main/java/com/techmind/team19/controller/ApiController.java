@@ -73,4 +73,20 @@ public class ApiController {
         return ResponseEntity.ok(storageService.listarBiblioteca(authentication));
     }
 
+    @DeleteMapping("/conteudos/{id}")
+    public ResponseEntity excluir(@PathVariable Long id, Authentication authentication) {
+
+        User user = userRepository
+                .findEntityByEmail(authentication.getName())
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        QueryResult result = resultRepository
+                .findByIdAndUser(id, user)
+                .orElseThrow(() -> new RuntimeException("Consulta não encontrada"));
+
+        resultRepository.delete(result);
+
+        return ResponseEntity.noContent().build();
+    }
+
 }
