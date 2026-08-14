@@ -17,6 +17,7 @@
 ![Swagger](https://img.shields.io/badge/Swagger-85EA2D?logo=swagger&logoColor=black)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.116+-009688?logo=fastapi&logoColor=white)
+![Nginx](https://img.shields.io/badge/Nginx-009639?logo=nginx&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Engine-2496ED?logo=docker&logoColor=white)
 ![Docker Compose](https://img.shields.io/badge/Docker_Compose-Enabled-2496ED?logo=docker&logoColor=white)
 ![Render](https://img.shields.io/badge/Render-46E3B7?logo=render&logoColor=white)
@@ -99,6 +100,8 @@ Seu papel é:
 ### Backend (Java)
 *   ☕ **Java 25**
 *   🍃 **Spring Boot 4.1.0**
+*   🔒 **Spring Security & JWT (JSON Web Tokens)**
+*   🔑 **BCrypt** (Hashing de senhas)
 *   🔧 **Maven** (Compilação)
 *   🔒 **RestClient + Validação** (Jakarta)
 *   🗄️ **Spring Data JPA & Hibernate**
@@ -129,56 +132,55 @@ Seu papel é:
 ---
 
 ```text
-techmind/
-│
-├── mobile/
-│   ├── lib/
-│   │   ├── main.dart
-│   │   ├── models/
-│   │   ├── screens/
-│   │   └── services/
-│   └──  pubspec.yaml
-│   
-│
-├── frontend/
-│   ├── assets/
-│   │      ai.png
-│   │      background.png
-│   │      brain.png
-│   │      knowledge.png
+.
+├── .dockerignore
+├── docker-compose.yml
+├── README.md
+├── backend/
+│   └── team19/
+│       ├── Dockerfile
+│       ├── pom.xml
+│       └── src/
+│           ├── main/
+│           │   ├── java/com/techmind/team19/
+│           │   │   ├── config/          # Configurações de CORS
+│           │   │   ├── controller/      # Endpoints da API e Autenticação
+│           │   │   ├── domain/          # Entidades e Repositórios (User, Tag, QueryResult)
+│           │   │   ├── dto/             # Data Transfer Objects
+│           │   │   ├── exception/       # Tratamento de erros globais
+│           │   │   ├── infra/           # Segurança e Tokens (JWT)
+│           │   │   └── service/         # Regras de negócio
+│           │   └── resources/
+│           │       └── application.properties
+│           └── test/
+├── Data Science/
+│   ├── techmind_dataset.csv
+│   ├── TechMind_Oficial.ipynb
+│   ├── vectorizer_tfidf.joblib
+│   └── techmind-api/                    # API do Modelo de ML
+│       ├── Dockerfile
+│       ├── render.yaml
+│       ├── requirements.txt
+│       ├── app/                         # Processamento de texto e Inferência
+│       ├── artifacts/                   # Modelos treinados (.joblib)
+│       └── tests/
+├── frontend/                            # Interface Web
+│   ├── Dockerfile
 │   ├── index.html
 │   ├── style.css
-│   └── app.js
-│
-├── backend/
-│   ├── src/
-│   │   ├── main/
-│   │   │   ├── java/com/techmind/team19/
-│   │   │   │   ├── config/
-│   │   │   │   │      SwaggerConfig.java
-│   │   │   │   ├── controller/
-│   │   │   │   │      ApiController.java
-│   │   │   │   ├── dto/
-│   │   │   │   │      DadosConsultaConteudos.java
-│   │   │   │   │      DadosRespostaConteudo.java
-│   │   │   │   ├── exception/
-│   │   │   │   │      GlobalException.java
-│   │   │   │   ├── model/
-│   │   │   │   │      Conteudo.java
-│   │   │   │   ├── repository/
-│   │   │   │   │      ConteudoRepository.java
-│   │   │   │   ├── service/
-│   │   │   │   │      ConteudoService.java
-│   │   │   │   │      ServiceDados.java
-│   │   │   │   └── Team19Application.java
-│   │   │   └── resources/
-│   │   │          application.properties
-│   │   │          db/migration/
-│   ├── Dockerfile
-│   ├── docker-compose.yml
-│   └── pom.xml
-│
-└── README.md
+│   ├── app.js
+│   └── assets/
+└── Mobile/                              # Aplicação Mobile (Flutter)
+    └── techmind/
+        ├── pubspec.yaml
+        ├── android/
+        ├── ios/
+        ├── lib/
+        │   ├── main.dart
+        │   └── view/
+        │       └── landpage.dart
+        ├── web/
+        └── windows/
 ```
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
@@ -292,6 +294,17 @@ A aplicação foi desenhada seguindo as melhores práticas de desenvolvimento co
 | **Camada de Serviço** | `ServiceDados` | Centraliza as regras de negócio do sistema, a orquestração de dados e a comunicação via HTTP Client. |
 | **Camada de Persistência** | `ConteudoRepository` | Interface Spring Data JPA para comunicação e operações CRUD com o Banco de Dados. |
 | **Tratamento Global** | `GlobalException` com `@RestControllerAdvice` | Intercepta exceções em tempo de execução, garantindo respostas padronizadas e códigos de status HTTP sem expor o stacktrace. |
+
+<hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
+
+## 🔐 Autenticação e Segurança
+
+A autenticação do sistema está **100% funcional** e integrada no **Backend** e **Frontend**:
+
+* **Spring Security & JWT:** O acesso a endpoints protegidos é autenticado via tokens Bearer **JWT** (`TokenService.java`, `SecurityFilter.java`).
+* **Criptografia de Senhas:** Senhas de usuários são armazenadas com hash seguro via **BCrypt**.
+* **Controle de Acesso & CORS:** Configurações globais de acesso cruzado (`config/`) liberando chamadas autorizadas para o Frontend SPA e o aplicativo Mobile.
+* **Frontend Web:** Fluxo e tela de login/registro integrados à API, armazenando e enviando tokens de autorização em requisições HTTP autenticadas.
 
 <hr style="border: 0; height: 3px; background: #333; margin: 20px 0;">
 
@@ -412,6 +425,8 @@ A aplicação utiliza `@RestControllerAdvice` para centralizar o tratamento das 
 | Código HTTP | Situação |
 |-------------|----------|
 | 🔴 400 | Requisição inválida |
+| 🔒 401 | Não autorizado (Token JWT ausente ou inválido) |
+| 🚫 403 | Acesso proibido (Permissão insuficiente) |
 | 🟠 404 | Recurso não encontrado |
 | 🔴 500 | Erro interno do servidor |
 | 🟡 Validação | Campos obrigatórios não informados |
@@ -478,7 +493,6 @@ docker compose up
 
 ---
 
-- Autenticação de usuários com Spring Security + JWT nos modais de Login/Cadastro
 - Implementação de gráficos estatísticos na aba Métricas
 - Cache de respostas para otimizar consultas da IA
 
