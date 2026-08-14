@@ -110,7 +110,7 @@ def predict_content(
     if hasattr(_model, "predict_proba"):
         probabilidades = _model.predict_proba(conteudo_tfidf)[0]
         prob_dict = dict(zip(_model.classes_, probabilidades))
-        probabilidade = round(float(prob_dict[categoria_prevista]), 4)
+        probabilidade = round(float(prob_dict[categoria_prevista]) * 100, 2)
     else:
         probabilidade = None
 
