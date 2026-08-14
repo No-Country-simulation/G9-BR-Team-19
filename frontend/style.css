@@ -338,7 +338,7 @@ body {
   border-radius: 16px;
   padding: 2.5rem;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .card-front {
