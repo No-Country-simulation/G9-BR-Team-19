@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8080';
+const API_BASE_URL = `${VM_IP}`;
 const PROCESSAR_ENDPOINT = `${API_BASE_URL}/api/conteudos/processar`;
 const LOGIN_ENDPOINT = `${API_BASE_URL}/entrar`;
 const SIGNUP_ENDPOINT = `${API_BASE_URL}/cadastrar`;
