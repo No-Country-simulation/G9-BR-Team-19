@@ -63,7 +63,7 @@ body {
   font-size: 1.1rem;
 }
 
-.logo-img, 
+.logo-img,
 .logo-icon {
   width: 35px;
   height: auto;
@@ -130,7 +130,7 @@ body {
 }
 
 .user-area {
-    position: relative;
+  position: relative;
 }
 
 .btn-user {
@@ -273,7 +273,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 2rem 1rem;
 }
 
@@ -309,9 +309,9 @@ body {
 
 /* FLIP CARD */
 .flip-card-container {
-  width: 100%;
-  max-width: 780px;
-  min-height: 520px;
+  width: 950px;
+  height: 500px;
+  max-width: calc(100vw - 2rem);
   perspective: 1200px;
 }
 
@@ -323,16 +323,12 @@ body {
   transform-style: preserve-3d;
 }
 
-.flip-card-inner.flipped {
-  transform: rotateY(180deg);
-}
-
 .card-face {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   background: rgba(13, 8, 30, 0.55);
@@ -349,14 +345,28 @@ body {
   transform: rotateY(0deg);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+}
+
+.flip-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+#form-analise {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   text-align: left;
+}
+
+.form-group:has(#conteudo) {
+  flex: 1;
 }
 
 .form-group label {
@@ -378,7 +388,8 @@ body {
 }
 
 #form-analise textarea {
-  min-height: 160px;
+  height: 100%;
+  min-height: 140px;
   resize: none;
 }
 
@@ -392,6 +403,7 @@ body {
   font-family: 'Iceland', sans-serif;
   font-size: 1.4rem;
   cursor: pointer;
+  margin-top: 1rem;
 }
 
 .card-back {
@@ -692,7 +704,7 @@ body {
   box-shadow: 0 8px 20px rgba(98, 36, 201, 0.35);
 }
 
-/* responsividade */
+/* RESPONSIVIDADE */
 
 @media (max-width: 950px) {
   .landing-main {
@@ -752,7 +764,7 @@ body {
 
   .flip-card-container {
     height: auto;
-    min-height: 520px;
+    min-height: 650px;
   }
 
   .card-face {
@@ -817,26 +829,15 @@ body {
   }
 
   .dropdown-menu {
-      min-width: 100%;
-      padding: 0.5rem;
-      top: 110%;
+    min-width: 100%;
+    padding: 0.5rem;
+    top: 110%;
   }
 
   .dropdown-item {
-      font-size: 1rem;
-      height: 30px;
-      gap: 6px;
-  }
-}
-
-/* Mobile Small (até 480px) */
-@media (max-width: 480px) {
-  .hero-content .left h1 {
-    font-size: 2.8rem;
-  }
-
-  .hero-content .left p {
-    font-size: 1.1rem;
+    font-size: 1rem;
+    height: 30px;
+    gap: 6px;
   }
 
   .start {
