@@ -845,6 +845,14 @@ body {
   margin: 0 auto;
 }
 
+.bibliotech-empty {
+  font-family: 'Iceland', sans-serif;
+  font-size: 24px;
+  color: #989696;
+  text-align: center;
+  grid-column: 1 / -1;
+}
+
 .tech-card {
   width: 256px;
   height: 272px;

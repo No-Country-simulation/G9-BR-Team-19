@@ -2,6 +2,8 @@ const API_BASE_URL = `http://${window.location.hostname}:8080`;
 const PROCESSAR_ENDPOINT = `${API_BASE_URL}/api/conteudos/processar`;
 const LOGIN_ENDPOINT = `${API_BASE_URL}/entrar`;
 const SIGNUP_ENDPOINT = `${API_BASE_URL}/cadastrar`;
+const BIBLIOTECA_ENDPOINT = `${API_BASE_URL}/api/biblioteca`;
+const EXCLUIR_CONTEUDO_ENDPOINT = (id) => `${API_BASE_URL}/api/conteudos/${id}`;
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -166,36 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
     modalLogin.classList.remove('hidden');
   });
 
-  formLogin.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const email = document.getElementById('login-email').value.trim();
-    const password = document.getElementById('login-password').value.trim();
-
-    try {
-      const response = await fetch(LOGIN_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
-
-      if (!response.ok) {
-        throw new Error('Credenciais inválidas ou erro no servidor.');
-      }
-
-      const data = await response.json();
-
-      localStorage.setItem('techmind_token', data.token);
-
-      modalLogin.classList.add('hidden');
-      formLogin.reset();
-      showApp();
-    } catch (err) {
-      console.error('Falha no login:', err);
-      alert(err.message);
-    }
-  });
-
   formSignup.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -228,6 +200,9 @@ document.addEventListener('DOMContentLoaded', () => {
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       switchTab(btn.dataset.target);
+      if (btn.dataset.target === 'tab-bibliotech') {
+        carregarBibliotech();
+      }
     });
   });
 
@@ -327,6 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   btnVerBibliotech.addEventListener('click', () => {
     switchTab('tab-bibliotech');
+    carregarBibliotech();
   });
 
   /* ==========================================
@@ -389,16 +365,94 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Monta um card a partir de um item retornado por /api/biblioteca
+  function criarCardBibliotech(item) {
+    const card = document.createElement('div');
+    card.className = 'tech-card';
+    card.dataset.id = item.id;
+
+    card.innerHTML = `
+      <div class="card-top">
+        <span class="card-badge">${item.categoria || '\u2014'}</span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">${item.titulo || '\u2014'}</h3>
+        <p class="card-description">${item.resumo || '\u2014'}</p>
+      </div>
+      <div class="card-footer">
+        <button type="button" class="btn-visualizar">Visualizar</button>
+        <button type="button" class="btn-delete" title="excluir" aria-label="Excluir">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+      </div>
+    `;
+
+    return card;
+  }
+
+  // Busca os itens salvos do usuário logado e renderiza no grid
+  async function carregarBibliotech() {
+    const token = localStorage.getItem('techmind_token');
+
+    if (!token || !cardsGrid) return;
+
+    try {
+      const response = await fetch(BIBLIOTECA_ENDPOINT, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      if (!response.ok) {
+        if (response.status === 401 || response.status === 403) {
+          localStorage.removeItem('techmind_token');
+        }
+        throw new Error(await extrairMensagemErro(response));
+      }
+
+      const itens = await response.json();
+
+      cardsGrid.innerHTML = '';
+
+      if (!itens || itens.length === 0) {
+        const vazio = document.createElement('p');
+        vazio.className = 'bibliotech-empty';
+        vazio.textContent = 'Nenhuma análise salva ainda.';
+        cardsGrid.appendChild(vazio);
+        return;
+      }
+
+      itens.forEach(item => cardsGrid.appendChild(criarCardBibliotech(item)));
+    } catch (err) {
+      console.error('Falha ao carregar a Bibliotech:', err);
+    }
+  }
+
   // 4. Ações dos Cards (Visualizar e Excluir)
   if (cardsGrid) {
-    cardsGrid.addEventListener('click', (e) => {
+    cardsGrid.addEventListener('click', async (e) => {
       const btnDelete = e.target.closest('.btn-delete');
       const btnVisualizar = e.target.closest('.btn-visualizar');
       const card = e.target.closest('.tech-card');
 
       if (btnDelete && card) {
-        if (confirm('Deseja realmente remover este item da sua Bibliotech?')) {
+        if (!confirm('Deseja realmente remover este item da sua Bibliotech?')) return;
+
+        const token = localStorage.getItem('techmind_token');
+        const id = card.dataset.id;
+
+        try {
+          const response = await fetch(EXCLUIR_CONTEUDO_ENDPOINT(id), {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+
+          if (!response.ok && response.status !== 204) {
+            throw new Error(await extrairMensagemErro(response));
+          }
+
           card.remove();
+        } catch (err) {
+          console.error('Falha ao excluir item:', err);
+          alert(err.message || 'Não foi possível excluir o item.');
         }
       } else if (btnVisualizar && card) {
         const titulo = card.querySelector('.card-title')?.textContent;

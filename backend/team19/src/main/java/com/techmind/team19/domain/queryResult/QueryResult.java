@@ -28,6 +28,8 @@ public class QueryResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String title;
+
     private String category;
 
     private Double probability;
@@ -54,7 +56,8 @@ public class QueryResult {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public QueryResult(DadosRespostaConteudo resposta, Set<Tag> tags, User user) {
+    public QueryResult(String title, DadosRespostaConteudo resposta, Set<Tag> tags, User user) {
+        this.title = title;
         this.category = resposta.category();
         this.probability = resposta.probability();
         this.summary = resposta.summary();
@@ -68,6 +71,14 @@ public class QueryResult {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getCategory() {
