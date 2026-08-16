@@ -311,9 +311,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Elementos da Bibliotech
   const inputBusca = document.getElementById('input-busca');
-  const btnDropdown = document.querySelector('.btn-dropdown');
-  const dropdownMenu = document.querySelector('.dropdown-menu');
-  const dropdownItems = document.querySelectorAll('.dropdown-item');
+  const btnDropdown = document.getElementById('btn-categorias');
+  const dropdownMenu = document.getElementById('dropdown-categorias');
+  const dropdownItems = dropdownMenu ? dropdownMenu.querySelectorAll('.dropdown-item') : [];
   const cardsGrid = document.querySelector('.cards-grid');
 
   // 1. Abrir/Fechar Dropdown de Categorias
@@ -380,7 +380,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <p class="card-description">${item.resumo || '\u2014'}</p>
       </div>
       <div class="card-footer">
-        <button type="button" class="btn-visualizar">Visualizar</button>
         <button type="button" class="btn-delete" title="excluir" aria-label="Excluir">
           <i class="fa-solid fa-trash-can"></i>
         </button>
@@ -426,11 +425,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 4. Ações dos Cards (Visualizar e Excluir)
+  // 4. Ações dos Cards (Excluir)
   if (cardsGrid) {
     cardsGrid.addEventListener('click', async (e) => {
       const btnDelete = e.target.closest('.btn-delete');
-      const btnVisualizar = e.target.closest('.btn-visualizar');
       const card = e.target.closest('.tech-card');
 
       if (btnDelete && card) {
@@ -454,9 +452,6 @@ document.addEventListener('DOMContentLoaded', () => {
           console.error('Falha ao excluir item:', err);
           alert(err.message || 'Não foi possível excluir o item.');
         }
-      } else if (btnVisualizar && card) {
-        const titulo = card.querySelector('.card-title')?.textContent;
-        alert(`Visualizando detalhes de: ${titulo}`);
       }
     });
   }
