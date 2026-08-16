@@ -24,7 +24,7 @@ public class SecurityConfigurations {
     private SecurityFilter securityFilter;
 
     @Autowired
-    private CorsConfigurationSource corsConfigurationSource; // Inject your custom bean
+    private CorsConfigurationSource corsConfigurationSource;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
