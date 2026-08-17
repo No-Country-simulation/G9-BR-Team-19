@@ -19,7 +19,6 @@ Thumbs.db
 **/mvnw.cmd
 
 # --- Frontend---
-frontend/
 node_modules/
 dist/
 build/

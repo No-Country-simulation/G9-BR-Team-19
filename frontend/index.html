@@ -52,7 +52,6 @@
       <nav class="nav-tabs">
         <button class="tab-btn active" data-target="tab-nova-analise">Nova Análise</button>
         <button class="tab-btn" data-target="tab-bibliotech">Bibliotech</button>
-        <button class="tab-btn" data-target="tab-metricas">Métricas</button>
       </nav>
 
       <div class="user-area">
@@ -102,27 +101,34 @@
             <div class="card-face card-back">
               <div class="resultado-grid">
                 <div class="resultado-dados">
-                  <div class="resultado-field">
-                    <span class="field-label">Categoria:</span>
-                    <div class="field-box" id="res-categoria">Engenharia de Software</div>
-                  </div>
+                    <div class="resultado-top-row">
+                        <div class="resultado-field">
+                            <span class="field-label">Categoria:</span>
+                            <div class="field-box" id="res-categoria">Engenharia de Software</div>
+                        </div>
 
-                  <div class="resultado-field">
-                    <span class="field-label">Tags:</span>
-                    <div class="tags-wrapper" id="res-tags">
-                      <span class="tag-box">#Backend</span>
-                      <span class="tag-box">#Java</span>
-                      <span class="tag-box">#SpringBoot</span>
-                      <span class="tag-box">#API</span>
+                        <div class="resultado-field probabilidade-field">
+                            <span class="field-label">Probabilidade:</span>
+                            <div class="field-box" id="res-probabilidade">100%</div>
+                        </div>
                     </div>
-                  </div>
 
-                  <div class="resultado-field">
-                    <span class="field-label">Resumo:</span>
-                    <div class="field-box resumo-box" id="res-resumo">
-                      O texto aborda...
+                    <div class="resultado-field">
+                        <span class="field-label">Tags:</span>
+                        <div class="tags-wrapper" id="res-tags">
+                            <span class="tag-box">#Backend</span>
+                            <span class="tag-box">#Java</span>
+                            <span class="tag-box">#SpringBoot</span>
+                            <span class="tag-box">#API</span>
+                        </div>
                     </div>
-                  </div>
+
+                    <div class="resultado-field">
+                      <span class="field-label">Resumo:</span>
+                      <div class="field-box resumo-box" id="res-resumo">
+                        O texto aborda...
+                      </div>
+                    </div>
                 </div>
 
                 <div class="resultado-illustration">
@@ -141,14 +147,39 @@
       </div>
 
       <div id="tab-bibliotech" class="tab-content hidden">
-        <div class="placeholder-box">
-          <h2>Em Breve</h2>
-        </div>
-      </div>
+          <div class="bibliotech-container">
 
-      <div id="tab-metricas" class="tab-content hidden">
-        <div class="placeholder-box">
-          <h2>Em Breve</h2>
+            <header class="bibliotech-header">
+                <h2 class="bibliotech-title">Sua Bibliotech de Conhecimento</h2>
+                <p class="bibliotech-subtitle">Gerencie e consulte seu acervo de textos analisados</p>
+            </header>
+
+            <div class="bibliotech-controls">
+                <div class="search-box">
+                    <input type="text" id="input-busca" placeholder="Busca por título, categoria ou palavra-chave">
+                    <span class="search-icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                </div>
+
+                <div class="dropdown-filter">
+                    <button type="button" class="btn-dropdown" id="btn-categorias">
+                        <span>Categorias</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                    <div class="dropdown-menu hidden" id="dropdown-categorias">
+                        <a href="#" class="dropdown-item">Backend</a>
+                        <a href="#" class="dropdown-item">Frontend</a>
+                        <a href="#" class="dropdown-item">Mobile</a>
+                        <a href="#" class="dropdown-item">AI/ML</a>
+                        <a href="#" class="dropdown-item">Data Science</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cards-grid" id="bibliotech-grid">
         </div>
       </div>
     </main>
