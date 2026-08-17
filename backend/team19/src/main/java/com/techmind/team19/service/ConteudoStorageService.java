@@ -5,6 +5,7 @@ import com.techmind.team19.domain.queryResult.QueryResultRepository;
 import com.techmind.team19.domain.user.User;
 import com.techmind.team19.domain.user.UserRepository;
 import com.techmind.team19.domain.tag.Tag;
+import com.techmind.team19.dto.DadosBibliotecaItem;
 import com.techmind.team19.dto.DadosRespostaConteudo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,13 +23,34 @@ public class ConteudoStorageService {
     @Autowired
     UserRepository userRepository;
 
-    public List<QueryResult> listarBiblioteca(Authentication authentication) {
+    public List<DadosBibliotecaItem> listarBiblioteca(Authentication authentication) {
 
         User user = userRepository
                 .findEntityByEmail(authentication.getName())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
-        return resultRepository.findByUser(user);
+        List<QueryResult> resultados = resultRepository.findByUser(user);
+        if (resultados == null) {
+            return List.of();
+        }
+
+        return resultados.stream()
+                .map(this::toBibliotecaItem)
+                .toList();
+    }
+
+    private DadosBibliotecaItem toBibliotecaItem(QueryResult queryResult) {
+        return new DadosBibliotecaItem(
+                queryResult.getId(),
+                queryResult.getTitle(),
+                queryResult.getCategory(),
+                queryResult.getProbability(),
+                queryResult.getTags().stream()
+                        .map(Tag::getName)
+                        .collect(Collectors.toSet()),
+                queryResult.getSummary(),
+                queryResult.getCreatedAt()
+        );
     }
 
     public List<DadosRespostaConteudo> listarPorCategoria(String categoria) {
