@@ -28,6 +28,8 @@ public class QueryResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String title;
+
     private String category;
 
     private Double probability;
@@ -54,11 +56,84 @@ public class QueryResult {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public QueryResult(DadosRespostaConteudo resposta, Set<Tag> tags, User user) {
+    public QueryResult(String title, DadosRespostaConteudo resposta, Set<Tag> tags, User user) {
+        this.title = title;
         this.category = resposta.category();
         this.probability = resposta.probability();
         this.summary = resposta.summary();
         this.tags = tags;
         this.user = user;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public Double getProbability() {
+        return probability;
+    }
+
+    public void setProbability(Double probability) {
+        this.probability = probability;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

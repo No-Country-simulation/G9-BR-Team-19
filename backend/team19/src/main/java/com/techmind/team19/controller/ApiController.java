@@ -6,6 +6,7 @@ import com.techmind.team19.domain.tag.Tag;
 import com.techmind.team19.domain.tag.TagRepository;
 import com.techmind.team19.domain.user.User;
 import com.techmind.team19.domain.user.UserRepository;
+import com.techmind.team19.dto.DadosBibliotecaItem;
 import com.techmind.team19.dto.DadosConsultaConteudos;
 import com.techmind.team19.dto.DadosRespostaConteudo;
 import com.techmind.team19.service.ConteudoStorageService;
@@ -61,7 +62,7 @@ public class ApiController {
                 .findEntityByEmail(authentication.getName())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
-        var queryResult = new QueryResult(resposta, tags, user);
+        var queryResult = new QueryResult(dados.title(), resposta, tags, user);
         resultRepository.save(queryResult);
 
         return ResponseEntity.ok(resposta);
@@ -69,8 +70,24 @@ public class ApiController {
 
     @Operation(summary = "Retorna a lista de consultas do usuário logado", description = "Chama o metodo listarBiblioteca() da classe ConteudoStorageService para listar os conteudos referente ao usuário logado.")
     @GetMapping("/biblioteca")
-    public ResponseEntity<List<QueryResult>> biblioteca(Authentication authentication) {
+    public ResponseEntity<List<DadosBibliotecaItem>> biblioteca(Authentication authentication) {
         return ResponseEntity.ok(storageService.listarBiblioteca(authentication));
+    }
+
+    @DeleteMapping("/conteudos/{id}")
+    public ResponseEntity excluir(@PathVariable Long id, Authentication authentication) {
+
+        User user = userRepository
+                .findEntityByEmail(authentication.getName())
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        QueryResult result = resultRepository
+                .findByIdAndUser(id, user)
+                .orElseThrow(() -> new RuntimeException("Consulta não encontrada"));
+
+        resultRepository.delete(result);
+
+        return ResponseEntity.noContent().build();
     }
 
 }

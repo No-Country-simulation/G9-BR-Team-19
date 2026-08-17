@@ -1,0 +1,19 @@
+# Environment Variables
+.env
+*.env
+
+# Node / JS
+node_modules/
+dist/
+build/
+
+# Python / Data Science
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# IDE / OS
+.DS_Store
+.idea/
+.vscode/
