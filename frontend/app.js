@@ -1,4 +1,4 @@
-const API_BASE_URL = `http://${window.location.hostname}:8080`;
+const API_BASE_URL = 'https://techmind-backend-c71m.onrender.com';
 const PROCESSAR_ENDPOINT = `${API_BASE_URL}/api/conteudos/processar`;
 const LOGIN_ENDPOINT = `${API_BASE_URL}/entrar`;
 const SIGNUP_ENDPOINT = `${API_BASE_URL}/cadastrar`;
