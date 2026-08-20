@@ -1100,11 +1100,18 @@ body {
   }
 
   .flip-card-inner {
-      min-height: 650px;
+    min-height: 650px;
   }
 
   .card-face {
     padding: 1.5rem;
+  }
+
+  .flip-card-inner.flipped .card-back {
+    position: relative;
+    inset: auto;
+    height: auto;
+    overflow: visible;
   }
 
   .resultado-grid {
@@ -1123,6 +1130,7 @@ body {
   .resultado-actions {
     flex-direction: column;
     gap: 0.8rem;
+    margin-bottom: 0.5rem;
   }
 
   .btn-action {
