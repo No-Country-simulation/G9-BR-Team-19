@@ -1099,6 +1099,10 @@ body {
     min-height: 650px;
   }
 
+  .flip-card-inner {
+      min-height: 650px;
+  }
+
   .card-face {
     padding: 1.5rem;
   }
